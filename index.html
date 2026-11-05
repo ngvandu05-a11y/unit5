@@ -3,1501 +3,970 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Lập Chứng Từ Kế Toán | Công ty TNHH Thời trang DB</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <!-- html-docx-js for Word Export -->
-    <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Ôn Tập Tiếng Anh 3 - Unit 5: My Hobbies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        
-        @media print {
-            body * {
-                visibility: hidden;
+        :root {
+            --primary: #2b7fff;
+            --primary-dark: #1a5bb8;
+            --secondary: #ff9f43;
+            --success: #2ec4b6;
+            --danger: #ff4757;
+            --bg-color: #f0f8ff;
+            --card-bg: #ffffff;
+            --text-color: #2f3542;
+            --en-highlight: #0288d1;
+            --en-bg: #e1f5fe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Hiệu ứng bong bóng bay */
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: rise 12s infinite ease-in-out;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0) scale(0.8);
             }
-            .printable-area, .printable-area * {
-                visibility: visible;
+            50% {
+                transform: translateX(100px) scale(1.2);
             }
-            .printable-area {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                margin: 0;
-                padding: 10mm;
-                background: white !important;
-                box-shadow: none !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            @page {
-                size: A4 portrait;
-                margin: 10mm 15mm;
+            100% {
+                bottom: 108vh;
+                transform: translateX(-50px) scale(1);
             }
         }
 
-        .voucher-font {
-            font-family: 'Times New Roman', Times, serif;
+        /* Container chính */
+        .app-container {
+            width: 100%;
+            max-width: 850px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            padding: 30px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            margin: 20px 0;
         }
 
-        .tab-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .hidden { display: none !important; }
+
+        /* Màn hình bắt đầu */
+        .welcome-card {
+            text-align: center;
+        }
+
+        .welcome-card h1 {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .student-badge {
+            display: inline-block;
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            border: 2px dashed #0288d1;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 16px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .info-item h4 {
+            color: #747d8c;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .btn-start {
+            background: linear-gradient(45deg, #ff9f43, #ff5252);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 82, 82, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(255, 82, 82, 0.5);
+        }
+
+        /* Thanh trạng thái khi làm bài */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef5ff;
+            padding: 12px 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .timer-box {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--danger);
+            background: #fff;
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 2px solid #ff4757;
+        }
+
+        .progress-box {
+            font-weight: 800;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+
+        /* Danh sách câu hỏi */
+        .question-card {
+            background: #fff;
+            border: 2px solid #e1e8ef;
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 22px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .question-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* Nhấn mạnh từ/câu Tiếng Anh */
+        .en-text {
+            font-family: 'Fredoka', 'Nunito', sans-serif;
+            color: #0288d1;
+            background-color: #e1f5fe;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        /* Styling cho hội thoại (Dialogue layout) */
+        .dialogue-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 15px 0;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 16px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .dialogue-bubble {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 90%;
+        }
+
+        .dialogue-bubble.speaker-a {
+            align-self: flex-start;
+        }
+
+        .dialogue-bubble.speaker-b {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #fff;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .speaker-a .avatar { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .speaker-b .avatar { background: linear-gradient(135deg, #10b981, #047857); }
+
+        .bubble-content {
+            background: #ffffff;
+            padding: 10px 16px;
+            border-radius: 16px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .speaker-a .bubble-content {
+            border-top-left-radius: 4px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .speaker-b .bubble-content {
+            border-top-right-radius: 4px;
+            border-right: 4px solid #10b981;
+        }
+
+        .blank-space {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 3px dashed #ff9f43;
+            color: #d97706;
+            text-align: center;
+            font-weight: 800;
+            padding: 0 6px;
+            background: #fffbeb;
+            border-radius: 4px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background: #e0f2fe;
+            border-color: #38bdf8;
+        }
+
+        .option-label input {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .text-input-box {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .text-input-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(43, 127, 255, 0.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 10px;
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Trang Kết Quả */
+        .result-card {
+            text-align: center;
+        }
+
+        .result-header {
+            margin-bottom: 25px;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            padding: 25px;
+            border-radius: 24px;
+            display: inline-block;
+            margin: 15px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #d63031;
+            line-height: 1;
+        }
+
+        .score-text {
+            font-weight: 800;
+            color: #2d3436;
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+
+        .time-details {
+            background: #f1f2f6;
+            padding: 15px;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .time-details div {
+            font-size: 0.95rem;
+            color: #57606f;
+        }
+
+        .time-details strong {
+            color: #2f3542;
+        }
+
+        /* Review lịch sử */
+        .review-section {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .review-section h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e8ef;
+            padding-bottom: 10px;
+        }
+
+        .review-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 18px;
+            border-left: 6px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .review-card.correct { border-left-color: var(--success); background: #f0fdf4; }
+        .review-card.incorrect { border-left-color: var(--danger); background: #fef2f2; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .correct .status-badge { background: #dcfce7; color: #15803d; }
+        .incorrect .status-badge { background: #fee2e2; color: #b91c1c; }
+
+        .explanation-box {
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-restart {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .app-container { padding: 18px; }
+            .welcome-card h1 { font-size: 1.5rem; }
+            .score-number { font-size: 2.8rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .dialogue-bubble { max-width: 100%; }
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+<body>
 
-    <!-- HEADER CHUNG -->
-    <header class="bg-indigo-900 text-white shadow-lg no-print">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center space-x-3 mb-3 md:mb-0 cursor-pointer" onclick="switchView('home')">
-                <div class="bg-gradient-to-br from-amber-400 to-amber-600 p-2.5 rounded-xl text-indigo-950 text-xl font-bold shadow-md">
-                    <i class="fa-solid fa-vault"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold tracking-tight">Công ty TNHH Thời trang DB</h1>
-                    <p class="text-xs text-indigo-200">Hệ thống Chứng từ Kế toán (Theo Thông tư 99/2025/TT-BTC)</p>
-                </div>
-            </div>
-            
-            <div class="flex flex-wrap items-center gap-2">
-                <button onclick="switchView('home')" id="nav-btn-home" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-800 text-white hover:bg-indigo-700 transition flex items-center shadow-inner">
-                    <i class="fa-solid fa-house mr-1.5"></i> Trang Chủ
-                </button>
-                <button onclick="switchView('thu')" id="nav-btn-thu" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-950 text-emerald-300 hover:bg-indigo-850 transition flex items-center border border-indigo-700">
-                    <i class="fa-solid fa-file-invoice-dollar mr-1.5"></i> Phiếu Thu
-                </button>
-                <button onclick="switchView('chi')" id="nav-btn-chi" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-950 text-amber-300 hover:bg-indigo-850 transition flex items-center border border-indigo-700">
-                    <i class="fa-solid fa-receipt mr-1.5"></i> Phiếu Chi
-                </button>
-                <button onclick="switchView('nhapkho')" id="nav-btn-nhapkho" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-950 text-cyan-300 hover:bg-indigo-850 transition flex items-center border border-indigo-700">
-                    <i class="fa-solid fa-boxes-packing mr-1.5"></i> Nhập Kho
-                </button>
-                <button onclick="switchView('xuatkho')" id="nav-btn-xuatkho" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-950 text-purple-300 hover:bg-indigo-850 transition flex items-center border border-indigo-700">
-                    <i class="fa-solid fa-truck-ramp-box mr-1.5"></i> Xuất Kho
-                </button>
-            </div>
-        </div>
-    </header>
+    <!-- Hiệu ứng bong bóng bay -->
+    <div class="bubbles" id="bubbleContainer"></div>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6">
+    <div class="app-container">
 
-        <!-- ================= VIEW 1: TRANG CHỦ / DASHBOARD LỰA CHỌN ================= -->
-        <div id="view-home" class="space-y-6 tab-transition">
-            <!-- Banner Chào mừng -->
-            <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 rounded-3xl p-6 md:p-10 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-center">
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
-                    <i class="fa-solid fa-coins"></i>
+        <!-- 1. TRANG MỞ ĐẦU -->
+        <div id="start-screen" class="welcome-card">
+            <h1>ĐỀ ÔN TẬP TIẾNG ANH 3<br><span style="color: var(--secondary);">UNIT 5: MY HOBBIES</span></h1>
+            <div class="student-badge">👧 Thí sinh: Cẩm Tiên</div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>Môn học:</h4>
+                    <p>Tiếng Anh 3 (Global Success)</p>
                 </div>
-                <div class="relative z-10 max-w-2xl mb-6 md:mb-0">
-                    <span class="bg-indigo-700/80 text-amber-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-indigo-600">
-                        <i class="fa-solid fa-shield-halved mr-1"></i> Chuẩn Thông tư 99/2025/TT-BTC
-                    </span>
-                    <h2 class="text-2xl md:text-4xl font-extrabold mt-3 tracking-tight">HỆ THỐNG LẬP CHỨNG TỪ KẾ TOÁN</h2>
-                    <p class="text-indigo-200 text-sm md:text-base mt-2 leading-relaxed">
-                        Phần mềm hỗ trợ tạo lập chứng từ Thu, Chi, Nhập kho và Xuất kho chuyên nghiệp. Tự động đọc số tiền thành chữ, tính toán thành tiền chi tiết, hỗ trợ xuất file Excel, Word và in ấn chuẩn A4.
-                    </p>
+                <div class="info-item">
+                    <h4>Nội dung ôn tập:</h4>
+                    <p>Từ vựng & Mẫu câu Unit 5</p>
                 </div>
-                <div class="relative z-10 grid grid-cols-2 gap-3">
-                    <button onclick="switchView('thu')" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-lg transition flex items-center justify-center text-xs">
-                        <i class="fa-solid fa-circle-plus mr-1.5"></i> Lập Phiếu Thu
-                    </button>
-                    <button onclick="switchView('chi')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-lg transition flex items-center justify-center text-xs">
-                        <i class="fa-solid fa-circle-minus mr-1.5"></i> Lập Phiếu Chi
-                    </button>
-                    <button onclick="switchView('nhapkho')" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-lg transition flex items-center justify-center text-xs">
-                        <i class="fa-solid fa-box-arrow-down mr-1.5"></i> Lập Nhập Kho
-                    </button>
-                    <button onclick="switchView('xuatkho')" class="bg-purple-500 hover:bg-purple-600 text-slate-950 font-bold px-4 py-3 rounded-2xl shadow-lg transition flex items-center justify-center text-xs">
-                        <i class="fa-solid fa-box-arrow-up mr-1.5"></i> Lập Xuất Kho
-                    </button>
+                <div class="info-item">
+                    <h4>Số lượng câu hỏi:</h4>
+                    <p>25 câu ngẫu nhiên</p>
+                </div>
+                <div class="info-item">
+                    <h4>Thời gian làm bài:</h4>
+                    <p>40 Phút</p>
                 </div>
             </div>
 
-            <!-- Thẻ Thống kê nhanh -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div onclick="switchView('thu')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 cursor-pointer hover:border-emerald-400 hover:shadow-md transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Mẫu Phiếu Thu</p>
-                            <h3 class="text-xl font-bold text-emerald-600 mt-1">Mẫu 01-TT</h3>
-                        </div>
-                        <div class="bg-emerald-50 text-emerald-600 p-3 rounded-xl text-xl">
-                            <i class="fa-solid fa-file-arrow-down"></i>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-2">Thu tiền mặt vào quỹ công ty</p>
-                </div>
+            <p style="color: #64748b; font-weight: 600; margin: 15px 0;">
+                💡 <i>Mỗi lần vào làm bài, hệ thống sẽ tự động bốc ngẫu nhiên 25 câu hỏi và đảo thứ tự đáp án!</i>
+            </p>
 
-                <div onclick="switchView('chi')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 cursor-pointer hover:border-amber-400 hover:shadow-md transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Mẫu Phiếu Chi</p>
-                            <h3 class="text-xl font-bold text-amber-600 mt-1">Mẫu 02-TT</h3>
-                        </div>
-                        <div class="bg-amber-50 text-amber-600 p-3 rounded-xl text-xl">
-                            <i class="fa-solid fa-file-arrow-up"></i>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-2">Chi tiền mặt từ quỹ công ty</p>
-                </div>
-
-                <div onclick="switchView('nhapkho')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 cursor-pointer hover:border-cyan-400 hover:shadow-md transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Phiếu Nhập Kho</p>
-                            <h3 class="text-xl font-bold text-cyan-600 mt-1">Mẫu 01-VT</h3>
-                        </div>
-                        <div class="bg-cyan-50 text-cyan-600 p-3 rounded-xl text-xl">
-                            <i class="fa-solid fa-boxes-packing"></i>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-2">Nhập kho nguyên vật liệu, hàng hóa</p>
-                </div>
-
-                <div onclick="switchView('xuatkho')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 cursor-pointer hover:border-purple-400 hover:shadow-md transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Phiếu Xuất Kho</p>
-                            <h3 class="text-xl font-bold text-purple-600 mt-1">Mẫu 02-VT</h3>
-                        </div>
-                        <div class="bg-purple-50 text-purple-600 p-3 rounded-xl text-xl">
-                            <i class="fa-solid fa-truck-ramp-box"></i>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-2">Xuất kho hàng hóa, thành phẩm</p>
-                </div>
-            </div>
-
-            <!-- Lựa chọn tính năng chi tiết -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <!-- Card Thu - Chi -->
-                <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-3 mb-4">
-                            <div class="bg-emerald-100 text-emerald-700 p-3 rounded-2xl text-xl">
-                                <i class="fa-solid fa-wallet"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-slate-900">Nghiệp vụ Quỹ Tiền Mặt</h3>
-                                <p class="text-xs text-slate-500">Quản lý thu chi tiền mặt theo Thông tư 99/2025/TT-BTC</p>
-                            </div>
-                        </div>
-                        <p class="text-slate-600 text-xs leading-relaxed">
-                            Lập phiếu thu tiền bán hàng, thu hồi công nợ hoặc lập phiếu chi tạm ứng, thanh toán chi phí vận hành với đầy đủ chữ ký giám đốc, kế toán trưởng, thủ quỹ, người nộp/nhận tiền.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mt-6">
-                        <button onclick="switchView('thu')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center">
-                            <i class="fa-solid fa-file-arrow-down mr-1.5"></i> Lập Phiếu Thu
-                        </button>
-                        <button onclick="switchView('chi')" class="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center">
-                            <i class="fa-solid fa-file-arrow-up mr-1.5"></i> Lập Phiếu Chi
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Card Kho Vật Tư -->
-                <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center space-x-3 mb-4">
-                            <div class="bg-cyan-100 text-cyan-700 p-3 rounded-2xl text-xl">
-                                <i class="fa-solid fa-warehouse"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-slate-900">Nghiệp vụ Kho Hàng & Vật Tư</h3>
-                                <p class="text-xs text-slate-500">Quản lý nhập xuất kho theo Thông tư 99/2025/TT-BTC</p>
-                            </div>
-                        </div>
-                        <p class="text-slate-600 text-xs leading-relaxed">
-                            Lập phiếu nhập kho nguyên phụ liệu thời trang từ nhà cung cấp hoặc phiếu xuất kho vải, phụ kiện cho xưởng sản xuất, bao gồm bảng chi tiết danh mục hàng hóa, số lượng, đơn giá và thành tiền tự động.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mt-6">
-                        <button onclick="switchView('nhapkho')" class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center">
-                            <i class="fa-solid fa-box-arrow-down mr-1.5"></i> Nhập Kho (01-VT)
-                        </button>
-                        <button onclick="switchView('xuatkho')" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center">
-                            <i class="fa-solid fa-box-arrow-up mr-1.5"></i> Xuất Kho (02-VT)
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <button class="btn-start" onclick="startQuiz()">BẮT ĐẦU LÀM BÀI 🚀</button>
         </div>
 
-        <!-- ================= VIEW 2: FORM PHIẾU THU (MẪU 01-TT) ================= -->
-        <div id="view-thu" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 tab-transition">
-            <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 no-print flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-                        <div class="flex items-center space-x-2">
-                            <button onclick="switchView('home')" class="text-slate-400 hover:text-slate-700 text-sm mr-1"><i class="fa-solid fa-arrow-left"></i></button>
-                            <h2 class="text-lg font-bold text-emerald-800 flex items-center">
-                                <i class="fa-solid fa-file-arrow-down mr-2"></i> Phiếu Thu (Mẫu 01-TT)
-                            </h2>
-                        </div>
-                        <button type="button" onclick="resetFormThu()" class="text-xs text-rose-600 hover:text-rose-800 font-medium bg-rose-50 px-2.5 py-1 rounded-md transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Làm mới
-                        </button>
-                    </div>
-
-                    <form id="form-thu-data" class="space-y-4">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Số Phiếu Thu</label>
-                                <input type="text" id="thu-so-phieu" value="PT001" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Ngày Lập</label>
-                                <input type="date" id="thu-ngay-lap" onchange="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Nợ</label>
-                                <input type="text" id="thu-tk-no" value="1111" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Có</label>
-                                <input type="text" id="thu-tk-co" value="131" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Họ tên người nộp tiền</label>
-                            <input type="text" id="thu-nguoi-nop" value="Trần Văn Minh" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Địa chỉ / Đơn vị</label>
-                            <input type="text" id="thu-dia-chi" value="Chi nhánh Quận 1 - Công ty TNHH Thời trang DB" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Lý do nộp tiền</label>
-                            <textarea id="thu-ly-do" rows="2" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">Thu tiền bán hàng hóa thời trang đơn hàng tháng này</textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Số Tiền (VNĐ)</label>
-                            <input type="text" id="thu-so-tien" value="5.200.000" oninput="formatAndConvertMoneyThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg font-semibold text-emerald-700">
-                            <p class="text-xs text-slate-500 mt-1 italic" id="thu-so-tien-chu-preview">Bằng chữ: Năm triệu, hai trăm nghìn đồng chẵn.</p>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Kèm theo chứng từ gốc</label>
-                            <input type="text" id="thu-chung-tu" value="01 phiếu giao hàng kiêm biên bản thanh lý" oninput="updatePreviewThu()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div class="border-t border-slate-100 pt-3 mt-4">
-                            <p class="text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">Thông tin Chữ ký</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Người lập</label><input type="text" id="thu-sig-lap" value="Lê Thị Ngọc Hân" oninput="updatePreviewThu()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Kế toán trưởng</label><input type="text" id="thu-sig-ketoan" value="Nguyễn Văn Đủ" oninput="updatePreviewThu()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Thủ quỹ</label><input type="text" id="thu-sig-thuquy" value="Đoàn Bảo Bình" oninput="updatePreviewThu()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Giám đốc</label><input type="text" id="thu-sig-giamdoc" value="Đặng Khánh Huyền" oninput="updatePreviewThu()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-200 grid grid-cols-2 gap-2">
-                    <button type="button" onclick="exportExcelThu()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-excel mr-1.5"></i> Xuất Excel</button>
-                    <button type="button" onclick="exportWordThu()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-word mr-1.5"></i> Xuất Word</button>
-                    <button type="button" onclick="printVoucher('printable-voucher-thu')" class="col-span-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs py-3 px-3 rounded-lg shadow-md transition flex items-center justify-center"><i class="fa-solid fa-print mr-2"></i> In Phiếu Thu (A4)</button>
-                </div>
+        <!-- 2. TRANG LÀM BÀI -->
+        <div id="quiz-screen" class="hidden">
+            <div class="quiz-header">
+                <div class="progress-box">👧 Cẩm Tiên</div>
+                <div class="timer-box">⏱️ <span id="timer-display">40:00</span></div>
             </div>
 
-            <!-- Preview Phiếu Thu -->
-            <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col items-center overflow-x-auto">
-                <div class="w-full flex justify-between items-center mb-4 no-print border-b border-slate-100 pb-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-900 bg-emerald-50 px-3 py-1 rounded-full"><i class="fa-solid fa-eye mr-1"></i> Xem trước Mẫu 01-TT</span>
-                    <button onclick="switchView('home')" class="text-xs text-indigo-600 hover:underline font-medium"><i class="fa-solid fa-house mr-1"></i> Về Trang chủ</button>
-                </div>
-                <div id="printable-voucher-thu" class="printable-area voucher-font bg-white text-black w-full max-w-[210mm] p-6 text-[13px] leading-relaxed border border-slate-200 shadow-md rounded-lg relative">
-                    <table class="w-full mb-3">
-                        <tr>
-                            <td class="align-top w-[55%] whitespace-nowrap">
-                                <div class="font-bold uppercase text-[12px]">Đơn vị: Công ty TNHH Thời trang DB</div>
-                                <div class="text-[10px]">Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh</div>
-                            </td>
-                            <td class="align-top text-right w-[45%]">
-                                <div class="font-bold text-[12px]">Mẫu số 01 - TT</div>
-                                <div class="text-[10px] italic">(Kèm theo Thông tư số 99/2025/TT-BTC)</div>
-                                <div class="text-xs space-y-1 inline-block text-left pr-4 mt-2">
-                                    <div>Số: <span id="prev-thu-so" class="font-bold underline px-1">PT001</span></div>
-                                    <div>Nợ: <span id="prev-thu-no" class="font-bold underline px-1">1111</span> | Có: <span id="prev-thu-co" class="font-bold underline px-1">131</span></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="text-center my-3">
-                        <h2 class="text-xl font-bold uppercase tracking-wide">PHIẾU THU</h2>
-                        <div id="prev-thu-ngaythang" class="text-xs italic">Ngày ...... tháng ...... năm 20...</div>
-                    </div>
-                    <div class="space-y-2.5 mb-5 text-[13px] mt-4">
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Họ tên người nộp:</span><span id="prev-thu-nguoinop" class="font-bold border-b border-dotted border-black flex-grow pl-1">Trần Văn Minh</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Địa chỉ:</span><span id="prev-thu-diachi" class="border-b border-dotted border-black flex-grow pl-1">Chi nhánh Quận 1</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Lý do nộp:</span><span id="prev-thu-lydo" class="border-b border-dotted border-black flex-grow pl-1">Thu tiền bán hàng</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Số tiền:</span><span id="prev-thu-sotien" class="font-bold border-b border-dotted border-black flex-grow pl-1">5.200.000 VNĐ</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Viết bằng chữ:</span><span id="prev-thu-sotienchu" class="italic border-b border-dotted border-black flex-grow pl-1">Năm triệu, hai trăm nghìn đồng chẵn.</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Chứng từ gốc kèm theo:</span><span id="prev-thu-chungtu" class="border-b border-dotted border-black flex-grow pl-1">01 phiếu giao hàng</span></div>
-                    </div>
-                    <div class="text-right text-xs mb-4 italic"><span id="prev-thu-ngayky">Ngày ...... tháng ...... năm 20...</span></div>
-                    <div class="grid grid-cols-5 text-center text-xs mt-2">
-                        <div><div class="font-bold text-[11px]">GIÁM ĐỐC</div><div class="italic text-[9px]">(Ký, đóng dấu)</div><div class="h-14"></div><div id="prev-thu-sig-giamdoc" class="font-bold text-[10px]">Đặng Khánh Huyền</div></div>
-                        <div><div class="font-bold text-[11px]">KẾ TOÁN TRƯỞNG</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-thu-sig-ketoan" class="font-bold text-[10px]">Nguyễn Văn Đủ</div></div>
-                        <div><div class="font-bold text-[11px]">NGƯỜI NỘP</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-thu-sig-nguoinop" class="font-bold text-[10px]">Trần Văn Minh</div></div>
-                        <div><div class="font-bold text-[11px]">NGƯỜI LẬP</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-thu-sig-lap" class="font-bold text-[10px]">Lê Thị Ngọc Hân</div></div>
-                        <div><div class="font-bold text-[11px]">THỦ QUỸ</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-thu-sig-thuquy" class="font-bold text-[10px]">Đoàn Bảo Bình</div></div>
-                    </div>
-                </div>
-            </div>
+            <form id="quiz-form">
+                <div id="questions-container"></div>
+                <button type="button" class="btn-submit" onclick="submitQuiz()">NỘP BÀI KẾT QUẢ 📑</button>
+            </form>
         </div>
 
-        <!-- ================= VIEW 3: FORM PHIẾU CHI (MẪU 02-TT) ================= -->
-        <div id="view-chi" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 tab-transition">
-            <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 no-print flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-                        <div class="flex items-center space-x-2">
-                            <button onclick="switchView('home')" class="text-slate-400 hover:text-slate-700 text-sm mr-1"><i class="fa-solid fa-arrow-left"></i></button>
-                            <h2 class="text-lg font-bold text-amber-800 flex items-center">
-                                <i class="fa-solid fa-receipt mr-2"></i> Phiếu Chi (Mẫu 02-TT)
-                            </h2>
-                        </div>
-                        <button type="button" onclick="resetFormChi()" class="text-xs text-rose-600 hover:text-rose-800 font-medium bg-rose-50 px-2.5 py-1 rounded-md transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Làm mới
-                        </button>
-                    </div>
+        <!-- 3. TRANG KẾT QUẢ -->
+        <div id="result-screen" class="result-card hidden">
+            <div class="result-header">
+                <h2>🎉 HOÀN THÀNH BÀI KIỂM TRA 🎉</h2>
+                <p style="font-size: 1.1rem; font-weight: 700; color: #475569; margin-top: 5px;">
+                    Thí sinh: <span style="color: var(--primary-dark);" id="res-student-name">Cẩm Tiên</span>
+                </p>
 
-                    <form id="form-chi-data" class="space-y-4">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Số Phiếu Chi</label>
-                                <input type="text" id="chi-so-phieu" value="PC001" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Ngày Lập</label>
-                                <input type="date" id="chi-ngay-lap" onchange="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Nợ</label>
-                                <input type="text" id="chi-tk-no" value="331" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Có</label>
-                                <input type="text" id="chi-tk-co" value="1111" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Họ tên người nhận tiền</label>
-                            <input type="text" id="chi-nguoi-nhan" value="Nguyễn Văn A" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Địa chỉ / Đơn vị</label>
-                            <input type="text" id="chi-dia-chi" value="Phòng Kinh Doanh - Công ty TNHH Thời trang DB" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Lý do chi tiền</label>
-                            <textarea id="chi-ly-do" rows="2" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">Thanh toán tiền chi phí văn phòng phẩm tháng này</textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Số Tiền (VNĐ)</label>
-                            <input type="text" id="chi-so-tien" value="1.550.000" oninput="formatAndConvertMoneyChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg font-semibold text-amber-700">
-                            <p class="text-xs text-slate-500 mt-1 italic" id="chi-so-tien-chu-preview">Bằng chữ: Một triệu, năm trăm năm mươi nghìn đồng chẵn.</p>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Kèm theo chứng từ gốc</label>
-                            <input type="text" id="chi-chung-tu" value="01 hóa đơn GTGT và bảng kê chi tiết" oninput="updatePreviewChi()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div class="border-t border-slate-100 pt-3 mt-4">
-                            <p class="text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">Thông tin Chữ ký</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Người lập</label><input type="text" id="chi-sig-lap" value="Lê Thị Ngọc Hân" oninput="updatePreviewChi()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Kế toán trưởng</label><input type="text" id="chi-sig-ketoan" value="Nguyễn Văn Đủ" oninput="updatePreviewChi()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Thủ quỹ</label><input type="text" id="chi-sig-thuquy" value="Đoàn Bảo Bình" oninput="updatePreviewChi()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Giám đốc</label><input type="text" id="chi-sig-giamdoc" value="Đặng Khánh Huyền" oninput="updatePreviewChi()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                            </div>
-                        </div>
-                    </form>
+                <div class="score-display">
+                    <div class="score-number" id="res-score">0 / 10</div>
+                    <div class="score-text" id="res-eval">Cố gắng hơn nhé!</div>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-200 grid grid-cols-2 gap-2">
-                    <button type="button" onclick="exportExcelChi()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-excel mr-1.5"></i> Xuất Excel</button>
-                    <button type="button" onclick="exportWordChi()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-word mr-1.5"></i> Xuất Word</button>
-                    <button type="button" onclick="printVoucher('printable-voucher-chi')" class="col-span-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs py-3 px-3 rounded-lg shadow-md transition flex items-center justify-center"><i class="fa-solid fa-print mr-2"></i> In Phiếu Chi (A4)</button>
+
+                <div class="time-details">
+                    <div>🕒 Bắt đầu: <strong id="res-start-time">--:--</strong></div>
+                    <div>📤 Nộp bài: <strong id="res-end-time">--:--</strong></div>
+                    <div>⏱️ Thời gian làm: <strong id="res-duration">-- phút</strong></div>
+                    <div>🎯 Số câu đúng: <strong id="res-correct-count">0/25</strong></div>
                 </div>
             </div>
 
-            <!-- Preview Phiếu Chi -->
-            <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col items-center overflow-x-auto">
-                <div class="w-full flex justify-between items-center mb-4 no-print border-b border-slate-100 pb-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-900 bg-amber-50 px-3 py-1 rounded-full"><i class="fa-solid fa-eye mr-1"></i> Xem trước Mẫu 02-TT</span>
-                    <button onclick="switchView('home')" class="text-xs text-indigo-600 hover:underline font-medium"><i class="fa-solid fa-house mr-1"></i> Về Trang chủ</button>
-                </div>
-                <div id="printable-voucher-chi" class="printable-area voucher-font bg-white text-black w-full max-w-[210mm] p-6 text-[13px] leading-relaxed border border-slate-200 shadow-md rounded-lg relative">
-                    <table class="w-full mb-3">
-                        <tr>
-                            <td class="align-top w-[55%] whitespace-nowrap">
-                                <div class="font-bold uppercase text-[12px]">Đơn vị: Công ty TNHH Thời trang DB</div>
-                                <div class="text-[10px]">Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh</div>
-                            </td>
-                            <td class="align-top text-right w-[45%]">
-                                <div class="font-bold text-[12px]">Mẫu số 02 - TT</div>
-                                <div class="text-[10px] italic">(Kèm theo Thông tư số 99/2025/TT-BTC)</div>
-                                <div class="text-xs space-y-1 inline-block text-left pr-4 mt-2">
-                                    <div>Số: <span id="prev-chi-so" class="font-bold underline px-1">PC001</span></div>
-                                    <div>Nợ: <span id="prev-chi-no" class="font-bold underline px-1">331</span> | Có: <span id="prev-chi-co" class="font-bold underline px-1">1111</span></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="text-center my-3">
-                        <h2 class="text-xl font-bold uppercase tracking-wide">PHIẾU CHI</h2>
-                        <div id="prev-chi-ngaythang" class="text-xs italic">Ngày ...... tháng ...... năm 20...</div>
-                    </div>
-                    <div class="space-y-2.5 mb-5 text-[13px] mt-4">
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Họ tên người nhận:</span><span id="prev-chi-nguoinhan" class="font-bold border-b border-dotted border-black flex-grow pl-1">Nguyễn Văn A</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Địa chỉ:</span><span id="prev-chi-diachi" class="border-b border-dotted border-black flex-grow pl-1">Phòng Kinh Doanh</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Lý do chi:</span><span id="prev-chi-lydo" class="border-b border-dotted border-black flex-grow pl-1">Thanh toán văn phòng phẩm</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Số tiền:</span><span id="prev-chi-sotien" class="font-bold border-b border-dotted border-black flex-grow pl-1">1.550.000 VNĐ</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Viết bằng chữ:</span><span id="prev-chi-sotienchu" class="italic border-b border-dotted border-black flex-grow pl-1">Một triệu, năm trăm năm mươi nghìn đồng chẵn.</span></div>
-                        <div class="flex"><span class="w-48 whitespace-nowrap">Chứng từ gốc kèm theo:</span><span id="prev-chi-chungtu" class="border-b border-dotted border-black flex-grow pl-1">01 hóa đơn GTGT</span></div>
-                    </div>
-                    <div class="text-right text-xs mb-4 italic"><span id="prev-chi-ngayky">Ngày ...... tháng ...... năm 20...</span></div>
-                    <div class="grid grid-cols-5 text-center text-xs mt-2">
-                        <div><div class="font-bold text-[11px]">GIÁM ĐỐC</div><div class="italic text-[9px]">(Ký, đóng dấu)</div><div class="h-14"></div><div id="prev-chi-sig-giamdoc" class="font-bold text-[10px]">Đặng Khánh Huyền</div></div>
-                        <div><div class="font-bold text-[11px]">KẾ TOÁN TRƯỞNG</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-chi-sig-ketoan" class="font-bold text-[10px]">Nguyễn Văn Đủ</div></div>
-                        <div><div class="font-bold text-[11px]">THỦ QUỸ</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-chi-sig-thuquy" class="font-bold text-[10px]">Đoàn Bảo Bình</div></div>
-                        <div><div class="font-bold text-[11px]">NGƯỜI LẬP</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-chi-sig-lap" class="font-bold text-[10px]">Lê Thị Ngọc Hân</div></div>
-                        <div><div class="font-bold text-[11px]">NGƯỜI NHẬN</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-chi-sig-nguoinhan" class="font-bold text-[10px]">Nguyễn Văn A</div></div>
-                    </div>
-                </div>
+            <div class="review-section">
+                <h3>📋 Lịch sử chi tiết bài làm</h3>
+                <div id="review-container"></div>
             </div>
+
+            <button class="btn-restart" onclick="resetToStart()">LÀM BÀI LẠI (ĐỀ MỚI) 🔄</button>
         </div>
 
-        <!-- ================= VIEW 4: PHIẾU NHẬP KHO (MẪU 01-VT) ================= -->
-        <div id="view-nhapkho" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 tab-transition">
-            <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 no-print flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-                        <div class="flex items-center space-x-2">
-                            <button onclick="switchView('home')" class="text-slate-400 hover:text-slate-700 text-sm mr-1"><i class="fa-solid fa-arrow-left"></i></button>
-                            <h2 class="text-lg font-bold text-cyan-800 flex items-center">
-                                <i class="fa-solid fa-boxes-packing mr-2"></i> Phiếu Nhập Kho (Mẫu 01-VT)
-                            </h2>
-                        </div>
-                        <button type="button" onclick="resetFormNhapKho()" class="text-xs text-rose-600 hover:text-rose-800 font-medium bg-rose-50 px-2.5 py-1 rounded-md transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Làm mới
-                        </button>
-                    </div>
+    </div>
 
-                    <form id="form-nhapkho-data" class="space-y-4">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Số Phiếu Nhập</label>
-                                <input type="text" id="nk-so-phieu" value="PNK001" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Ngày Lập</label>
-                                <input type="date" id="nk-ngay-lap" onchange="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Nợ</label>
-                                <input type="text" id="nk-tk-no" value="1561" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Có</label>
-                                <input type="text" id="nk-tk-co" value="331" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Họ tên người giao hàng</label>
-                            <input type="text" id="nk-nguoi-giao" value="Hoàng Văn Nam" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Theo hóa đơn số</label>
-                                <input type="text" id="nk-theo-chung-tu" value="HD/2026/089" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Ngày chứng từ</label>
-                                <input type="date" id="nk-ngay-chung-tu" onchange="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nhập tại kho / Địa điểm</label>
-                            <input type="text" id="nk-kho-nhap" value="Kho Tổng - Công ty TNHH Thời trang DB" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Chứng từ kèm theo</label>
-                            <input type="text" id="nk-chung-tu-kem" value="01 Hóa đơn GTGT và Biên bản giao nhận" oninput="updatePreviewNhapKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-
-                        <!-- Danh sách hàng hóa nhập kho -->
-                        <div class="pt-2">
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs font-bold text-slate-700 uppercase tracking-wide">Danh sách vật tư / hàng hóa</label>
-                                <button type="button" onclick="addVTuRow('nhap')" class="text-xs bg-cyan-50 text-cyan-700 hover:bg-cyan-100 px-2.5 py-1 rounded-md font-semibold"><i class="fa-solid fa-plus mr-1"></i> Thêm dòng</button>
-                            </div>
-                            <div id="container-items-nhap" class="space-y-3 max-h-56 overflow-y-auto pr-1">
-                                <!-- Dòng 1 mặc định -->
-                                <div class="item-row-nhap bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-2 text-xs">
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-bold text-cyan-800 item-stt">#1</span>
-                                        <button type="button" onclick="removeVTuRow(this, 'nhap')" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash-can"></i></button>
-                                    </div>
-                                    <input type="text" placeholder="Tên, nhãn hiệu, quy cách hàng hóa" value="Vải cotton cao cấp màu trắng sữa" class="item-ten w-full px-2 py-1.5 border border-slate-300 rounded bg-white" oninput="updatePreviewNhapKho()">
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <input type="text" placeholder="Mã số" value="VAI-CT01" class="item-maso px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreviewNhapKho()">
-                                        <input type="text" placeholder="ĐVT" value="Mét" class="item-dvt px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreviewNhapKho()">
-                                        <input type="number" placeholder="SL theo CT" value="500" class="item-slct px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreviewNhapKho()">
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <label class="text-[10px] text-slate-500">Thực nhập:</label>
-                                            <input type="number" value="500" class="item-sltt w-full px-2 py-1 border border-slate-300 rounded bg-white font-semibold text-cyan-700" oninput="updatePreviewNhapKho()">
-                                        </div>
-                                        <div>
-                                            <label class="text-[10px] text-slate-500">Đơn giá (VNĐ):</label>
-                                            <input type="text" value="45.000" class="item-dongia w-full px-2 py-1 border border-slate-300 rounded bg-white font-semibold" oninput="formatItemMoney(this); updatePreviewNhapKho()">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-t border-slate-100 pt-3 mt-4">
-                            <p class="text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">Thông tin Chữ ký</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Người lập</label><input type="text" id="nk-sig-lap" value="Lê Thị Ngọc Hân" oninput="updatePreviewNhapKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Kế toán trưởng</label><input type="text" id="nk-sig-ketoan" value="Nguyễn Văn Đủ" oninput="updatePreviewNhapKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Thủ kho</label><input type="text" id="nk-sig-thukho" value="Huỳnh Thị Kiều Nghi" oninput="updatePreviewNhapKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Giám đốc / Phê duyệt</label><input type="text" id="nk-sig-giamdoc" value="Đặng Khánh Huyền" oninput="updatePreviewNhapKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-200 grid grid-cols-2 gap-2">
-                    <button type="button" onclick="exportExcelNhapKho()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-excel mr-1.5"></i> Xuất Excel</button>
-                    <button type="button" onclick="exportWordNhapKho()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-word mr-1.5"></i> Xuất Word</button>
-                    <button type="button" onclick="printVoucher('printable-voucher-nhap')" class="col-span-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs py-3 px-3 rounded-lg shadow-md transition flex items-center justify-center"><i class="fa-solid fa-print mr-2"></i> In Phiếu Nhập Kho (A4)</button>
-                </div>
-            </div>
-
-            <!-- Preview Phiếu Nhập Kho -->
-            <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col items-center overflow-x-auto">
-                <div class="w-full flex justify-between items-center mb-4 no-print border-b border-slate-100 pb-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-900 bg-cyan-50 px-3 py-1 rounded-full"><i class="fa-solid fa-eye mr-1"></i> Xem trước Mẫu 01-VT</span>
-                    <button onclick="switchView('home')" class="text-xs text-indigo-600 hover:underline font-medium"><i class="fa-solid fa-house mr-1"></i> Về Trang chủ</button>
-                </div>
-                <div id="printable-voucher-nhap" class="printable-area voucher-font bg-white text-black w-full max-w-[210mm] p-6 text-[12px] leading-relaxed border border-slate-200 shadow-md rounded-lg relative">
-                    <table class="w-full mb-3">
-                        <tr>
-                            <td class="align-top w-[55%] whitespace-nowrap">
-                                <div class="font-bold uppercase text-[11px]">Đơn vị: Công ty TNHH Thời trang DB</div>
-                                <div class="text-[10px]">Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh</div>
-                            </td>
-                            <td class="align-top text-right w-[45%]">
-                                <div class="font-bold text-[11px]">Mẫu số 01 - VT</div>
-                                <div class="text-[10px] italic">(Kèm theo Thông tư số 99/2025/TT-BTC)</div>
-                                <div class="text-xs space-y-1 inline-block text-left pr-4 mt-2">
-                                    <div>Số: <span id="prev-nk-so" class="font-bold underline px-1">PNK001</span></div>
-                                    <div>Nợ: <span id="prev-nk-no" class="font-bold underline px-1">1561</span> | Có: <span id="prev-nk-co" class="font-bold underline px-1">331</span></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="text-center my-3">
-                        <h2 class="text-lg font-bold uppercase tracking-wide">PHIẾU NHẬP KHO</h2>
-                        <div id="prev-nk-ngaythang" class="text-xs italic">Ngày ...... tháng ...... năm 20...</div>
-                    </div>
-                    <div class="space-y-1.5 mb-4 text-[12px]">
-                        <div>- Họ và tên người giao hàng: <span id="prev-nk-nguoigiao" class="font-bold">Hoàng Văn Nam</span></div>
-                        <div>- Theo hóa đơn số: <span id="prev-nk-hoadon" class="underline">HD/2026/089</span> &nbsp;&nbsp; Ngày: <span id="prev-nk-ngayhd" class="underline">.../.../20...</span> của nhà cung cấp.</div>
-                        <div>- Nhập tại kho: <span id="prev-nk-khonhap" class="font-bold">Kho Tổng - Công ty TNHH Thời trang DB</span></div>
-                    </div>
-
-                    <!-- Bảng chi tiết vật tư -->
-                    <table class="w-full border-collapse border border-black text-[11px] mb-4">
-                        <thead>
-                            <tr class="bg-slate-100 text-center font-bold">
-                                <th class="border border-black p-1.5 w-10">STT</th>
-                                <th class="border border-black p-1.5">Tên, nhãn hiệu, quy cách vật tư, sản phẩm, hàng hóa</th>
-                                <th class="border border-black p-1.5 w-16">Mã số</th>
-                                <th class="border border-black p-1.5 w-14">ĐVT</th>
-                                <th class="border border-black p-1.5 w-16">Theo CT</th>
-                                <th class="border border-black p-1.5 w-16">Thực nhập</th>
-                                <th class="border border-black p-1.5 w-20">Đơn giá</th>
-                                <th class="border border-black p-1.5 w-24">Thành tiền</th>
-                            </tr>
-                            <tr class="text-center italic text-[10px] bg-slate-50">
-                                <td class="border border-black p-0.5">A</td>
-                                <td class="border border-black p-0.5">B</td>
-                                <td class="border border-black p-0.5">C</td>
-                                <td class="border border-black p-0.5">D</td>
-                                <td class="border border-black p-0.5">1</td>
-                                <td class="border border-black p-0.5">2</td>
-                                <td class="border border-black p-0.5">3</td>
-                                <td class="border border-black p-0.5">4</td>
-                            </tr>
-                        </thead>
-                        <tbody id="prev-nk-tbody">
-                            <!-- Được render động bằng JS -->
-                        </tbody>
-                        <tfoot>
-                            <tr class="font-bold">
-                                <td colspan="7" class="border border-black p-1.5 text-right">CỘNG TỔNG CỘNG:</td>
-                                <td id="prev-nk-tongtien" class="border border-black p-1.5 text-right">0 VNĐ</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-                    <div class="space-y-1 mb-4 text-[12px]">
-                        <div>- Tổng số tiền (viết bằng chữ): <span id="prev-nk-sotienchu" class="italic font-bold">Không đồng.</span></div>
-                        <div>- Số chứng từ gốc kèm theo: <span id="prev-nk-chungtukem" class="underline">01 Hóa đơn GTGT và Biên bản giao nhận</span></div>
-                    </div>
-
-                    <div class="text-right text-xs mb-2 italic"><span id="prev-nk-ngayky">Ngày ...... tháng ...... năm 20...</span></div>
-                    <div class="grid grid-cols-4 text-center text-xs mt-2 pt-1">
-                        <div><div class="font-bold text-[11px]">NGƯỜI LẬP PHIẾU</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-nk-sig-lap" class="font-bold text-[10px]">Lê Thị Ngọc Hân</div></div>
-                        <div><div class="font-bold text-[11px]">NGƯỜI GIAO HÀNG</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-nk-sig-nguoigiao" class="font-bold text-[10px]">Hoàng Văn Nam</div></div>
-                        <div><div class="font-bold text-[11px]">THỦ KHO</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-nk-sig-thukho" class="font-bold text-[10px]">Huỳnh Thị Kiều Nghi</div></div>
-                        <div><div class="font-bold text-[11px]">KẾ TOÁN TRƯỞNG</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-nk-sig-ketoan" class="font-bold text-[10px]">Nguyễn Văn Đủ</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= VIEW 5: PHIẾU XUẤT KHO (MẪU 02-VT) ================= -->
-        <div id="view-xuatkho" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 tab-transition">
-            <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 no-print flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-                        <div class="flex items-center space-x-2">
-                            <button onclick="switchView('home')" class="text-slate-400 hover:text-slate-700 text-sm mr-1"><i class="fa-solid fa-arrow-left"></i></button>
-                            <h2 class="text-lg font-bold text-purple-800 flex items-center">
-                                <i class="fa-solid fa-truck-ramp-box mr-2"></i> Phiếu Xuất Kho (Mẫu 02-VT)
-                            </h2>
-                        </div>
-                        <button type="button" onclick="resetFormXuatKho()" class="text-xs text-rose-600 hover:text-rose-800 font-medium bg-rose-50 px-2.5 py-1 rounded-md transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Làm mới
-                        </button>
-                    </div>
-
-                    <form id="form-xuatkho-data" class="space-y-4">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Số Phiếu Xuất</label>
-                                <input type="text" id="xk-so-phieu" value="PXK001" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Ngày Lập</label>
-                                <input type="date" id="xk-ngay-lap" onchange="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Nợ</label>
-                                <input type="text" id="xk-tk-no" value="621" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tài Khoản Có</label>
-                                <input type="text" id="xk-tk-co" value="152" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Họ tên người nhận hàng</label>
-                            <input type="text" id="xk-nguoi-nhan" value="Nguyễn Văn Xưởng" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Lý do xuất kho</label>
-                            <input type="text" id="xk-ly-do" value="Xuất vải nguyên phụ liệu cho xưởng may sản xuất đơn hàng tháng này" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Xuất tại kho / Địa điểm</label>
-                            <input type="text" id="xk-kho-xuat" value="Kho Nguyên Phụ Liệu - Công ty TNHH Thời trang DB" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Chứng từ kèm theo</label>
-                            <input type="text" id="xk-chung-tu-kem" value="01 Lệnh sản xuất và Giấy đề xuất vật tư" oninput="updatePreviewXuatKho()" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg">
-                        </div>
-
-                        <!-- Danh sách hàng hóa xuất kho -->
-                        <div class="pt-2">
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs font-bold text-slate-700 uppercase tracking-wide">Danh sách vật tư / hàng hóa xuất</label>
-                                <button type="button" onclick="addVTuRow('xuat')" class="text-xs bg-purple-50 text-purple-700 hover:bg-purple-100 px-2.5 py-1 rounded-md font-semibold"><i class="fa-solid fa-plus mr-1"></i> Thêm dòng</button>
-                            </div>
-                            <div id="container-items-xuat" class="space-y-3 max-h-56 overflow-y-auto pr-1">
-                                <!-- Dòng 1 mặc định -->
-                                <div class="item-row-xuat bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-2 text-xs">
-                                    <div class="flex justify-between items-center">
-                                        <span class="font-bold text-purple-800 item-stt">#1</span>
-                                        <button type="button" onclick="removeVTuRow(this, 'xuat')" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash-can"></i></button>
-                                    </div>
-                                    <input type="text" placeholder="Tên, nhãn hiệu, quy cách hàng hóa" value="Vải cotton cao cấp màu trắng sữa" class="item-ten w-full px-2 py-1.5 border border-slate-300 rounded bg-white" oninput="updatePreviewXuatKho()">
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <input type="text" placeholder="Mã số" value="VAI-CT01" class="item-maso px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreviewXuatKho()">
-                                        <input type="text" placeholder="ĐVT" value="Mét" class="item-dvt px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreviewXuatKho()">
-                                        <input type="number" placeholder="SL yêu cầu" value="200" class="item-slreq px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreviewXuatKho()">
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <label class="text-[10px] text-slate-500">Thực xuất:</label>
-                                            <input type="number" value="200" class="item-sltt w-full px-2 py-1 border border-slate-300 rounded bg-white font-semibold text-purple-700" oninput="updatePreviewXuatKho()">
-                                        </div>
-                                        <div>
-                                            <label class="text-[10px] text-slate-500">Đơn giá (VNĐ):</label>
-                                            <input type="text" value="45.000" class="item-dongia w-full px-2 py-1 border border-slate-300 rounded bg-white font-semibold" oninput="formatItemMoney(this); updatePreviewXuatKho()">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-t border-slate-100 pt-3 mt-4">
-                            <p class="text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">Thông tin Chữ ký</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Người lập</label><input type="text" id="xk-sig-lap" value="Lê Thị Ngọc Hân" oninput="updatePreviewXuatKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Kế toán trưởng</label><input type="text" id="xk-sig-ketoan" value="Nguyễn Văn Đủ" oninput="updatePreviewXuatKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Thủ kho</label><input type="text" id="xk-sig-thukho" value="Đoàn Bảo Bình" oninput="updatePreviewXuatKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                                <div><label class="block text-[11px] text-slate-600 mb-0.5">Giám đốc / Phê duyệt</label><input type="text" id="xk-sig-giamdoc" value="Đặng Khánh Huyền" oninput="updatePreviewXuatKho()" class="w-full text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-200 grid grid-cols-2 gap-2">
-                    <button type="button" onclick="exportExcelXuatKho()" class="bg-purple-600 hover:bg-purple-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-excel mr-1.5"></i> Xuất Excel</button>
-                    <button type="button" onclick="exportWordXuatKho()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center"><i class="fa-solid fa-file-word mr-1.5"></i> Xuất Word</button>
-                    <button type="button" onclick="printVoucher('printable-voucher-xuat')" class="col-span-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs py-3 px-3 rounded-lg shadow-md transition flex items-center justify-center"><i class="fa-solid fa-print mr-2"></i> In Phiếu Xuất Kho (A4)</button>
-                </div>
-            </div>
-
-            <!-- Preview Phiếu Xuất Kho -->
-            <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col items-center overflow-x-auto">
-                <div class="w-full flex justify-between items-center mb-4 no-print border-b border-slate-100 pb-3">
-                    <span class="text-xs font-bold uppercase tracking-wider text-purple-900 bg-purple-50 px-3 py-1 rounded-full"><i class="fa-solid fa-eye mr-1"></i> Xem trước Mẫu 02-VT</span>
-                    <button onclick="switchView('home')" class="text-xs text-indigo-600 hover:underline font-medium"><i class="fa-solid fa-house mr-1"></i> Về Trang chủ</button>
-                </div>
-                <div id="printable-voucher-xuat" class="printable-area voucher-font bg-white text-black w-full max-w-[210mm] p-6 text-[12px] leading-relaxed border border-slate-200 shadow-md rounded-lg relative">
-                    <table class="w-full mb-3">
-                        <tr>
-                            <td class="align-top w-[55%] whitespace-nowrap">
-                                <div class="font-bold uppercase text-[11px]">Đơn vị: Công ty TNHH Thời trang DB</div>
-                                <div class="text-[10px]">Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh</div>
-                            </td>
-                            <td class="align-top text-right w-[45%]">
-                                <div class="font-bold text-[11px]">Mẫu số 02 - VT</div>
-                                <div class="text-[10px] italic">(Kèm theo Thông tư số 99/2025/TT-BTC)</div>
-                                <div class="text-xs space-y-1 inline-block text-left pr-4 mt-2">
-                                    <div>Số: <span id="prev-xk-so" class="font-bold underline px-1">PXK001</span></div>
-                                    <div>Nợ: <span id="prev-xk-no" class="font-bold underline px-1">621</span> | Có: <span id="prev-xk-co" class="font-bold underline px-1">152</span></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="text-center my-3">
-                        <h2 class="text-lg font-bold uppercase tracking-wide">PHIẾU XUẤT KHO</h2>
-                        <div id="prev-xk-ngaythang" class="text-xs italic">Ngày ...... tháng ...... năm 20...</div>
-                    </div>
-                    <div class="space-y-1.5 mb-4 text-[12px]">
-                        <div>- Họ và tên người nhận hàng: <span id="prev-xk-nguoinhan" class="font-bold">Nguyễn Văn Xưởng</span></div>
-                        <div>- Lý do xuất kho: <span id="prev-xk-lydo" class="font-bold">Xuất vải nguyên phụ liệu cho xưởng may</span></div>
-                        <div>- Xuất tại kho: <span id="prev-xk-khoxuat" class="font-bold">Kho Nguyên Phụ Liệu - Công ty TNHH Thời trang DB</span></div>
-                    </div>
-
-                    <!-- Bảng chi tiết vật tư xuất -->
-                    <table class="w-full border-collapse border border-black text-[11px] mb-4">
-                        <thead>
-                            <tr class="bg-slate-100 text-center font-bold">
-                                <th class="border border-black p-1.5 w-10">STT</th>
-                                <th class="border border-black p-1.5">Tên, nhãn hiệu, quy cách vật tư, sản phẩm, hàng hóa</th>
-                                <th class="border border-black p-1.5 w-16">Mã số</th>
-                                <th class="border border-black p-1.5 w-14">ĐVT</th>
-                                <th class="border border-black p-1.5 w-16">Yêu cầu</th>
-                                <th class="border border-black p-1.5 w-16">Thực xuất</th>
-                                <th class="border border-black p-1.5 w-20">Đơn giá</th>
-                                <th class="border border-black p-1.5 w-24">Thành tiền</th>
-                            </tr>
-                            <tr class="text-center italic text-[10px] bg-slate-50">
-                                <td class="border border-black p-0.5">A</td>
-                                <td class="border border-black p-0.5">B</td>
-                                <td class="border border-black p-0.5">C</td>
-                                <td class="border border-black p-0.5">D</td>
-                                <td class="border border-black p-0.5">1</td>
-                                <td class="border border-black p-0.5">2</td>
-                                <td class="border border-black p-0.5">3</td>
-                                <td class="border border-black p-0.5">4</td>
-                            </tr>
-                        </thead>
-                        <tbody id="prev-xk-tbody">
-                            <!-- Được render động bằng JS -->
-                        </tbody>
-                        <tfoot>
-                            <tr class="font-bold">
-                                <td colspan="7" class="border border-black p-1.5 text-right">CỘNG TỔNG CỘNG:</td>
-                                <td id="prev-xk-tongtien" class="border border-black p-1.5 text-right">0 VNĐ</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-                    <div class="space-y-1 mb-4 text-[12px]">
-                        <div>- Tổng số tiền (viết bằng chữ): <span id="prev-xk-sotienchu" class="italic font-bold">Không đồng.</span></div>
-                        <div>- Số chứng từ gốc kèm theo: <span id="prev-xk-chungtukem" class="underline">01 Lệnh sản xuất và Giấy đề xuất vật tư</span></div>
-                    </div>
-
-                    <div class="text-right text-xs mb-2 italic"><span id="prev-xk-ngayky">Ngày ...... tháng ...... năm 20...</span></div>
-                    <div class="grid grid-cols-4 text-center text-xs mt-2 pt-1">
-                        <div><div class="font-bold text-[11px]">NGƯỜI LẬP PHIẾU</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-xk-sig-lap" class="font-bold text-[10px]">Lê Thị Ngọc Hân</div></div>
-                        <div><div class="font-bold text-[11px]">NGƯỜI NHẬN HÀNG</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-xk-sig-nguoinhan" class="font-bold text-[10px]">Nguyễn Văn Xưởng</div></div>
-                        <div><div class="font-bold text-[11px]">THỦ KHO</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-xk-sig-thukho" class="font-bold text-[10px]">Đoàn Bảo Bình</div></div>
-                        <div><div class="font-bold text-[11px]">KẾ TOÁN TRƯỜNG</div><div class="italic text-[9px]">(Ký, họ tên)</div><div class="h-14"></div><div id="prev-xk-sig-ketoan" class="font-bold text-[10px]">Nguyễn Văn Đủ</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- FOOTER CHUNG -->
-    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500 no-print">
-        Công ty TNHH Thời trang DB &bull; Phần mềm Quản lý Chứng từ Kế toán theo Thông tư 99/2025/TT-BTC
-    </footer>
-
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('thu-ngay-lap').value = today;
-            document.getElementById('chi-ngay-lap').value = today;
-            document.getElementById('nk-ngay-lap').value = today;
-            document.getElementById('nk-ngay-chung-tu').value = today;
-            document.getElementById('xk-ngay-lap').value = today;
-            
-            updatePreviewThu();
-            updatePreviewChi();
-            updatePreviewNhapKho();
-            updatePreviewXuatKho();
-        });
+        // --- ĐƯỜNG DẪN GOOGLE APPS SCRIPT WEB APP ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQAhWa0lNMb8oGl2L6tNGIvdL9XCVQ3z2_jJa7w_V24ZDT6eTmlhjKYDNSnn8kKBN3/exec";
 
-        function switchView(viewName) {
-            ['home', 'thu', 'chi', 'nhapkho', 'xuatkho'].forEach(v => {
-                let viewEl = document.getElementById('view-' + v);
-                if (viewEl) viewEl.classList.add('hidden');
-                let btn = document.getElementById('nav-btn-' + v);
-                if (btn) {
-                    btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center bg-indigo-950 text-indigo-200 border border-indigo-700 hover:bg-indigo-850";
+        // --- NGÂN HÀNG CÂU HỎI TỔNG HỢP ---
+        const rawQuestionBank = [
+            // Dạng hội thoại
+            { 
+                type: 'dialogue_mc', 
+                q: 'Chọn từ còn thiếu để hoàn thành đoạn hội thoại sau:', 
+                dialogue: [
+                    { speaker: 'A', text: 'What\'s your <span class="blank-space">?</span>' },
+                    { speaker: 'B', text: 'It\'s <span class="en-text">singing</span>.' }
+                ],
+                options: ['name', 'hobby', 'face', 'friend'], 
+                answer: 'hobby', 
+                exp: 'Mẫu câu hỏi sở thích: What\'s your hobby?' 
+            },
+            { 
+                type: 'dialogue_mc', 
+                q: 'Chọn từ đúng để điền vào chỗ trống:', 
+                dialogue: [
+                    { speaker: 'A', text: 'What\'s your hobby?' },
+                    { speaker: 'B', text: '<span class="blank-space">?</span> <span class="en-text">cooking</span>.' }
+                ],
+                options: ['I\'m', 'It\'s', 'My', 'You'], 
+                answer: 'It\'s', 
+                exp: 'Cấu trúc trả lời: It\'s + V-ing (It\'s cooking).' 
+            },
+            { 
+                type: 'dialogue_fill', 
+                q: 'Hoàn thành hội thoại bằng từ thích hợp:', 
+                dialogue: [
+                    { speaker: 'A', text: 'What\'s your <span class="blank-space">?</span>' },
+                    { speaker: 'B', text: 'It\'s <span class="en-text">swimming</span>.' }
+                ],
+                answer: 'hobby', 
+                exp: 'Câu hỏi sở thích chuẩn: What\'s your hobby?' 
+            },
+            { 
+                type: 'dialogue_fill', 
+                q: 'Hoàn thành hội thoại bằng từ thích hợp:', 
+                dialogue: [
+                    { speaker: 'A', text: 'What\'s your hobby?' },
+                    { speaker: 'B', text: '<span class="blank-space">?</span> <span class="en-text">swimming</span>.' }
+                ],
+                answer: 'It\'s', 
+                exp: 'Câu trả lời chuẩn: It\'s swimming.' 
+            },
+            { 
+                type: 'dialogue_fill', 
+                q: 'Điền từ còn thiếu vào hội thoại:', 
+                dialogue: [
+                    { speaker: 'A', text: 'What\'s your <span class="blank-space">?</span>, Mai?' },
+                    { speaker: 'B', text: 'I like <span class="blank-space">?</span> (nấu ăn).' }
+                ],
+                answer: 'cooking', 
+                exp: 'cooking = nấu ăn' 
+            },
+            { 
+                type: 'dialogue_fill', 
+                q: 'Điền từ tiếng Anh đúng nghĩa:', 
+                dialogue: [
+                    { speaker: 'A', text: 'Is your hobby <span class="blank-space">?</span> (chạy bộ)?' },
+                    { speaker: 'B', text: 'Yes, it is.' }
+                ],
+                answer: 'running', 
+                exp: 'running = chạy bộ' 
+            },
+            
+            // Trắc nghiệm chọn A, B, C, D đơn
+            { type: 'mc', q: 'Từ <span class="en-text">cooking</span> trong tiếng Anh có nghĩa là gì?', options: ['Chạy bộ', 'Nấu ăn', 'Bơi lội', 'Vẽ tranh'], answer: 'Nấu ăn', exp: 'cooking = nấu ăn.' },
+            { type: 'mc', q: 'Từ nào sau đây trong tiếng Anh có nghĩa là "hát / ca hát"?', options: ['singing', 'dancing', 'walking', 'running'], answer: 'singing', exp: 'singing = ca hát.' },
+            { type: 'mc', q: 'Từ <span class="en-text">swimming</span> trong tiếng Việt có nghĩa là:', options: ['Đi bộ', 'Vẽ tô màu', 'Bơi lội', 'Nấu ăn'], answer: 'Bơi lội', exp: 'swimming = bơi lội.' },
+            { type: 'mc', q: 'Từ nào trong tiếng Anh có nghĩa là "nhảy / khiêu vũ"?', options: ['running', 'dancing', 'singing', 'drawing'], answer: 'dancing', exp: 'dancing = nhảy / khiêu vũ.' },
+            { type: 'mc', q: 'Từ <span class="en-text">running</span> có nghĩa là gì?', options: ['Chạy bộ', 'Đi bộ', 'Bơi lội', 'Ca hát'], answer: 'Chạy bộ', exp: 'running = chạy bộ.' },
+            { type: 'mc', q: 'Từ nào sau đây có nghĩa là "vẽ tranh bằng bút nét"?', options: ['painting', 'drawing', 'cooking', 'dancing'], answer: 'drawing', exp: 'drawing = vẽ nét / vẽ bằng bút chì.' },
+            { type: 'mc', q: 'Từ <span class="en-text">painting</span> trong tiếng Việt có nghĩa là:', options: ['Nấu ăn', 'Tô màu / Vẽ tranh bằng màu', 'Chạy bộ', 'Ca hát'], answer: 'Tô màu / Vẽ tranh bằng màu', exp: 'painting = tô màu / vẽ tranh bằng màu.' },
+            { type: 'mc', q: 'Từ <span class="en-text">walking</span> trong tiếng Anh có nghĩa là gì?', options: ['Đi bộ', 'Bơi lội', 'Hát', 'Nhảy'], answer: 'Đi bộ', exp: 'walking = đi bộ.' },
+            { type: 'mc', q: 'Điền động từ phù hợp: "<span class="en-text">I ______ dancing.</span>" (Tôi thích nhảy.)', options: ['touch', 'open', 'like', 'spell'], answer: 'like', exp: 'Cấu trúc bộc lộ sở thích: I like + V-ing.' },
+            { type: 'mc', q: 'Chọn câu tiếng Anh đúng cho nghĩa "Sở thích của tôi là bơi lội.":', options: ['My hobby is swimming.', 'I\'m swimming.', 'Touch your swimming.', 'What\'s your swimming?'], answer: 'My hobby is swimming.', exp: 'Cấu trúc: My hobby is + V-ing.' },
+            { type: 'mc', q: 'Từ <span class="en-text">hobby</span> trong tiếng Việt có nghĩa là gì?', options: ['Bạn bè', 'Sở thích', 'Tên gọi', 'Lớp học'], answer: 'Sở thích', exp: 'hobby = sở thích.' },
+            { type: 'mc', q: 'Hoàn thành câu: "<span class="en-text">I like ______.</span>" (Tôi thích vẽ tranh tô màu.)', options: ['paint', 'painting', 'a paint', 'an paint'], answer: 'painting', exp: 'Sau "like" dùng động từ dạng V-ing (painting).' },
+            { type: 'mc', q: 'Khi bạn muốn hỏi sở thích của người khác, bạn dùng mẫu câu nào?', options: ['How old are you?', 'What\'s your name?', 'What\'s your hobby?', 'How are you?'], answer: 'What\'s your hobby?', exp: 'Câu hỏi sở thích chuẩn của Unit 5.' },
+            { type: 'mc', q: 'Để trả lời cho câu hỏi "<span class="en-text">What\'s your hobby?</span>", cấu trúc nào sau đây là đúng?', options: ['It\'s drawing.', 'Fine, thank you.', 'My name\'s Nam.', 'Yes, it is.'], answer: 'It\'s drawing.', exp: 'Trả lời sở thích bằng It\'s + V-ing.' },
+            { type: 'mc', q: 'Chọn từ KHÁC loại với các từ còn lại:', options: ['cooking', 'running', 'singing', 'nose'], answer: 'nose', exp: 'nose là bộ phận cơ thể (Unit 4), 3 từ còn lại là sở thích (Unit 5).' },
+            { type: 'mc', q: 'Điền từ còn thiếu: "<span class="en-text">I like ______.</span>" (Tôi thích đi bộ.)', options: ['walking', 'walk', 'a walk', 'walks'], answer: 'walking', exp: 'I like walking. (Tôi thích đi bộ).' },
+            { type: 'mc', q: 'Đâu là hành động chỉ sở thích liên quan đến âm nhạc?', options: ['swimming', 'singing', 'cooking', 'running'], answer: 'singing', exp: 'singing (ca hát) thuộc chủ đề âm nhạc.' },
+            { type: 'mc', q: 'Chọn câu đúng ngữ pháp tiếng Anh về sở thích:', options: ['I like cooking.', 'I likes cooking.', 'I cooking.', 'I touch cooking.'], answer: 'I like cooking.', exp: 'Cấu trúc đúng: I like + V-ing.' },
+
+            // Dạng Điền chữ cái còn thiếu / Điền từ ngắn
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (nấu ăn): <span class="en-text">c _ o k i n g</span>', answer: ['o', 'O'], exp: 'cooking (nấu ăn)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (ca hát): <span class="en-text">s _ n g i n g</span>', answer: ['i', 'I'], exp: 'singing (ca hát)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (bơi lội): <span class="en-text">s w _ m m i n g</span>', answer: ['i', 'I'], exp: 'swimming (bơi lội)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (nhảy/khiêu vũ): <span class="en-text">d _ n c i n g</span>', answer: ['a', 'A'], exp: 'dancing (nhảy / khiêu vũ)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (chạy bộ): <span class="en-text">r _ n n i n g</span>', answer: ['u', 'U'], exp: 'running (chạy bộ)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (vẽ nét): <span class="en-text">d r _ w i n g</span>', answer: ['a', 'A'], exp: 'drawing (vẽ nét)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (tô màu): <span class="en-text">p _ i n t i n g</span>', answer: ['a', 'A'], exp: 'painting (tô màu)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (đi bộ): <span class="en-text">w _ l k i n g</span>', answer: ['a', 'A'], exp: 'walking (đi bộ)' },
+            { type: 'fill', q: 'Điền chữ cái còn thiếu để tạo từ đúng nghĩa (sở thích): <span class="en-text">h _ b b y</span>', answer: ['o', 'O'], exp: 'hobby (sở thích)' },
+
+            { type: 'fill', q: 'Điền từ thích hợp vào chỗ trống: <span class="en-text">What\'s your ______? - It\'s drawing.</span>', answer: ['hobby', 'HOBBY', 'Hobby'], exp: 'Mẫu câu hỏi sở thích: What\'s your hobby?' },
+            { type: 'fill', q: 'Điền từ thích hợp vào chỗ trống: <span class="en-text">I ______ cooking.</span>', answer: ['like', 'Like', 'LIKE'], exp: 'Cấu trúc bộc lộ sở thích: I like + V-ing' },
+            { type: 'fill', q: 'Điền từ thích hợp vào chỗ trống: <span class="en-text">What\'s your hobby? - ______ dancing.</span>', answer: ['It\'s', 'it\'s', 'IT\'S', 'it is', 'IT IS'], exp: 'Cấu trúc trả lời: It\'s + V-ing' },
+            { type: 'fill', q: 'Điền từ thích hợp vào chỗ trống: <span class="en-text">______ your hobby? - It\'s running.</span>', answer: ['What\'s', 'what is', 'what\'s'], exp: 'Từ hỏi sở thích: What\'s your hobby?' },
+            { type: 'fill', q: 'Điền từ thích hợp vào chỗ trống: <span class="en-text">Mai likes ______ in the pool.</span> (bơi lội)', answer: ['swimming','SWIMMINING','Swimming'], exp: 'Từ chỉ hoạt động bơi lội dưới hồ bơi: swimming' },
+            { type: 'fill', q: 'Điền từ thích hợp vào chỗ trống: <span class="en-text">Ben likes ______ English songs.</span> (ca hát)', answer: ['singing','SINGING','Singing'], exp: 'Từ chỉ hoạt động hát bài hát tiếng Anh: singing' },
+
+            { type: 'fill', q: 'Điền từ tiếng Anh đúng nghĩa: <span class="en-text">What\'s your hobby? - It\'s ______</span> (tô màu / vẽ màu).', answer: ['painting','Painting','PAINTING'], exp: 'painting = tô màu / vẽ màu' },
+            { type: 'fill', q: 'Điền từ tiếng Anh đúng nghĩa: <span class="en-text">I like ______</span> (chạy bộ) <span class="en-text">in the morning.</span>', answer: ['running','RUNNING','Running'], exp: 'running = chạy bộ' },
+            { type: 'fill', q: 'Điền từ tiếng Anh thích hợp: <span class="en-text">My hobby ______ walking.</span>', answer: ['is', 'IS','Is'], exp: 'Động từ to-be đi kèm: My hobby is...' },
+            { type: 'fill', q: 'Điền từ tiếng Anh thích hợp: <span class="en-text">I ______ drawing pictures.</span> (Tôi thích vẽ tranh.)', answer: ['like', 'Like', 'LIKE'], exp: 'I like + V-ing' },
+            { type: 'fill', q: 'Điền từ thích hợp: <span class="en-text">What\'s ______ hobby? - It\'s cooking.</span> (Sở thích của bạn là gì?)', answer: ['your','YOUR','Your'], exp: 'Tính từ sở hữu: What\'s your hobby?' }
+        ];
+
+        let activeQuestions = [];
+        let timerInterval = null;
+        let timeRemaining = 40 * 60;
+        let startTimeObj = null;
+        let endTimeObj = null;
+
+        function generateBubbles() {
+            const container = document.getElementById('bubbleContainer');
+            for(let i = 0; i < 15; i++) {
+                let bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                let size = Math.random() * 40 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.animationDelay = `${Math.random() * 8}s`;
+                bubble.style.animationDuration = `${Math.random() * 6 + 8}s`;
+                container.appendChild(bubble);
+            }
+        }
+        generateBubbles();
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function startQuiz() {
+            startTimeObj = new Date();
+            
+            let shuffledBank = shuffleArray(rawQuestionBank);
+            let selected = shuffledBank.slice(0, 25);
+
+            activeQuestions = selected.map((item, index) => {
+                let qData = { ...item, originalIndex: index };
+                if (qData.type === 'mc' || qData.type === 'dialogue_mc') {
+                    qData.shuffledOptions = shuffleArray(qData.options);
                 }
+                return qData;
             });
 
-            let targetView = document.getElementById('view-' + viewName);
-            if (targetView) targetView.classList.remove('hidden');
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
 
-            let activeBtn = document.getElementById('nav-btn-' + viewName);
-            if (activeBtn) {
-                let colors = { 
-                    home: 'bg-indigo-800 text-white shadow-inner', 
-                    thu: 'bg-emerald-600 text-white shadow', 
-                    chi: 'bg-amber-600 text-white shadow', 
-                    nhapkho: 'bg-cyan-600 text-white shadow', 
-                    xuatkho: 'bg-purple-600 text-white shadow' 
-                };
-                activeBtn.className = `px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center ${colors[viewName]}`;
-            }
+            renderQuestions();
+            startTimer();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function docSoThanhChu(so) {
-            if (so === 0 || isNaN(so)) return "Không đồng";
-            const chuSo = ["không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"];
-            const docBlock = function(bas, chucDau) {
-                let tram = Math.floor(bas / 100);
-                let chuc = Math.floor((bas % 100) / 10);
-                let donVi = bas % 10;
-                let ketQua = "";
-                if (tram === 0 && chucDau) { ketQua += " không trăm"; } 
-                else if (tram !== 0) { ketQua += " " + chuSo[tram] + " trăm"; }
-                if (chuc === 0 && donVi !== 0 && (tram !== 0 || chucDau)) { ketQua += " lẻ"; } 
-                else if (chuc === 1) { ketQua += " mười"; } 
-                else if (chuc > 1) { ketQua += " " + chuSo[chuc] + " mươi"; }
-                if (donVi === 1 && chuc > 1) { ketQua += " mốt"; } 
-                else if (donVi === 5 && chuc > 0) { ketQua += " lăm"; } 
-                else if (donVi !== 0) { ketQua += " " + chuSo[donVi]; }
-                return ketQua;
+        function buildDialogueHTML(dialogue) {
+            let html = `<div class="dialogue-container">`;
+            dialogue.forEach(line => {
+                let speakerClass = line.speaker === 'A' ? 'speaker-a' : 'speaker-b';
+                html += `
+                    <div class="dialogue-bubble ${speakerClass}">
+                        <div class="avatar">${line.speaker}</div>
+                        <div class="bubble-content">${line.text}</div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            return html;
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            activeQuestions.forEach((q, idx) => {
+                let card = document.createElement('div');
+                card.className = 'question-card';
+
+                let html = `<div class="question-title">Câu ${idx + 1}: ${q.q}</div>`;
+
+                if (q.dialogue) {
+                    html += buildDialogueHTML(q.dialogue);
+                }
+
+                if (q.type === 'mc' || q.type === 'dialogue_mc') {
+                    html += `<div class="options-grid">`;
+                    q.shuffledOptions.forEach((opt) => {
+                        let formattedOpt = opt.replace(/"/g, '&quot;');
+                        html += `
+                            <label class="option-label">
+                                <input type="radio" name="q_${idx}" value="${formattedOpt}">
+                                <span class="en-text">${opt}</span>
+                            </label>
+                        `;
+                    });
+                    html += `</div>`;
+                } else {
+                    html += `
+                        <div>
+                            <input type="text" class="text-input-box" id="q_${idx}" placeholder="Nhập từ tiếng Anh trả lời của em ở đây..." autocomplete="off">
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = html;
+                container.appendChild(card);
+            });
+        }
+
+        function startTimer() {
+            timeRemaining = 40 * 60;
+            updateTimerDisplay();
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert('⏰ Đã hết thời gian làm bài (40 phút)! Hệ thống sẽ tự động nộp bài.');
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            let m = Math.floor(timeRemaining / 60);
+            let s = timeRemaining % 60;
+            document.getElementById('timer-display').innerText = 
+                `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            endTimeObj = new Date();
+
+            let correctCount = 0;
+            let reviewHTML = '';
+            let detailsData = [];
+
+            let day = String(startTimeObj.getDate()).padStart(2, '0');
+            let randomCode = Math.floor(1000 + Math.random() * 9000);
+            let submissionId = `TIEN_${day}_${randomCode}`;
+
+            activeQuestions.forEach((q, idx) => {
+                let studentAns = '';
+                if (q.type === 'mc' || q.type === 'dialogue_mc') {
+                    let selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+                    studentAns = selected ? selected.value : '(Bỏ trống)';
+                } else {
+                    let input = document.getElementById(`q_${idx}`);
+                    studentAns = input ? input.value.trim() : '';
+                    if (studentAns === '') studentAns = '(Bỏ trống)';
+                }
+
+                let isCorrect = false;
+                if (q.type === 'mc' || q.type === 'dialogue_mc') {
+                    isCorrect = (studentAns === q.answer);
+                } else {
+                    isCorrect = (studentAns.toLowerCase() === q.answer.toLowerCase());
+                }
+
+                if (isCorrect) correctCount++;
+                let questionScore = isCorrect ? (10 / activeQuestions.length) : 0;
+
+                detailsData.push({
+                    questionNo: idx + 1,
+                    questionText: q.q,
+                    correctAnswer: q.answer,
+                    studentAnswer: studentAns,
+                    isCorrect: isCorrect,
+                    score: questionScore.toFixed(2)
+                });
+
+                reviewHTML += `
+                    <div class="review-card ${isCorrect ? 'correct' : 'incorrect'}">
+                        <span class="status-badge">${isCorrect ? '✓ ĐÚNG' : '✗ SAI'}</span>
+                        <div style="font-weight: 800; font-size: 1.05rem; color: #1e293b; margin-bottom: 6px;">
+                            Câu ${idx + 1}: ${q.q}
+                        </div>
+                `;
+
+                if (q.dialogue) {
+                    reviewHTML += buildDialogueHTML(q.dialogue);
+                }
+
+                reviewHTML += `
+                        <div style="font-size: 0.95rem; margin-bottom: 4px;">
+                            👉 Cẩm Tiên chọn/điền: <strong style="color: ${isCorrect ? '#16a34a' : '#dc2626'};" class="en-text">${escapeHtml(studentAns)}</strong>
+                        </div>
+                        <div style="font-size: 0.95rem; margin-bottom: 6px;">
+                            ✅ Đáp án đúng: <strong style="color: #16a34a;" class="en-text">${escapeHtml(q.answer)}</strong>
+                        </div>
+                        <div class="explanation-box">
+                            📌 <strong>Lời giải chi tiết:</strong> ${q.exp}
+                        </div>
+                    </div>
+                `;
+            });
+
+            let finalScore = ((correctCount / activeQuestions.length) * 10).toFixed(1);
+            let durationSeconds = Math.floor((endTimeObj - startTimeObj) / 1000);
+            let durM = Math.floor(durationSeconds / 60);
+            let durS = durationSeconds % 60;
+            let durationText = `${durM} phút ${durS} giây`;
+
+            document.getElementById('res-score').innerText = `${finalScore} / 10`;
+            document.getElementById('res-correct-count').innerText = `${correctCount} / ${activeQuestions.length}`;
+            document.getElementById('res-start-time').innerText = formatTime(startTimeObj);
+            document.getElementById('res-end-time').innerText = formatTime(endTimeObj);
+            document.getElementById('res-duration').innerText = durationText;
+            document.getElementById('review-container').innerHTML = reviewHTML;
+
+            let evalText = '';
+            if (finalScore >= 9) evalText = '🌟 Xuất sắc! Cẩm Tiên giỏi quá!';
+            else if (finalScore >= 7) evalText = '🎉 Kết quả rất tốt! Cố gắng phát huy nhé!';
+            else if (finalScore >= 5) evalText = '👍 Hoàn thành khá tốt! Hãy đọc lại lời giải nhé!';
+            else evalText = '💪 Cẩm Tiên cố gắng luyện tập thêm ở lần sau nhé!';
+            document.getElementById('res-eval').innerText = evalText;
+
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Gửi dữ liệu sang Google Sheets
+            const payload = {
+                submissionId: submissionId,
+                studentName: "Cẩm Tiên",
+                startTime: formatDateTime(startTimeObj),
+                endTime: formatDateTime(endTimeObj),
+                duration: durationText,
+                correctRatio: `${correctCount}/${activeQuestions.length}`,
+                finalScore: finalScore,
+                details: detailsData
             };
 
-            let ty = Math.floor(so / 1000000000);
-            so %= 1000000000;
-            let trieu = Math.floor(so / 1000000);
-            so %= 1000000;
-            let nghin = Math.floor(so / 1000);
-            let tram = so % 1000;
-
-            let kqStr = "";
-            if (ty > 0) kqStr += docBlock(ty, false) + " tỷ";
-            if (trieu > 0) kqStr += docBlock(trieu, ty > 0) + " triệu";
-            if (nghin > 0) kqStr += docBlock(nghin, ty > 0 || trieu > 0) + " nghìn";
-            if (tram > 0) kqStr += docBlock(tram, ty > 0 || trieu > 0 || nghin > 0);
-            else if (kqStr === "") kqStr = " không";
-
-            kqStr = kqStr.trim() + " đồng chẵn.";
-            return kqStr.charAt(0).toUpperCase() + kqStr.slice(1);
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(err => console.error("Lỗi gửi dữ liệu về Sheets:", err));
         }
 
-        // ================= THU & CHI =================
-        function formatAndConvertMoneyThu() {
-            let rawVal = document.getElementById('thu-so-tien').value.replace(/\D/g, '');
-            let num = parseInt(rawVal || '0', 10);
-            document.getElementById('thu-so-tien').value = num.toLocaleString('vi-VN');
-            document.getElementById('thu-so-tien-chu-preview').innerText = "Bằng chữ: " + docSoThanhChu(num);
-            updatePreviewThu();
-        }
-        function updatePreviewThu() {
-            document.getElementById('prev-thu-so').innerText = document.getElementById('thu-so-phieu').value || '...';
-            document.getElementById('prev-thu-no').innerText = document.getElementById('thu-tk-no').value || '...';
-            document.getElementById('prev-thu-co').innerText = document.getElementById('thu-tk-co').value || '...';
-            document.getElementById('prev-thu-nguoinop').innerText = document.getElementById('thu-nguoi-nop').value;
-            document.getElementById('prev-thu-sig-nguoinop').innerText = document.getElementById('thu-nguoi-nop').value;
-            document.getElementById('prev-thu-diachi').innerText = document.getElementById('thu-dia-chi').value;
-            document.getElementById('prev-thu-lydo').innerText = document.getElementById('thu-ly-do').value;
-            let num = parseInt(document.getElementById('thu-so-tien').value.replace(/\D/g, '') || '0', 10);
-            document.getElementById('prev-thu-sotien').innerText = num.toLocaleString('vi-VN') + " VNĐ";
-            let words = docSoThanhChu(num);
-            document.getElementById('prev-thu-sotienchu').innerText = words;
-            document.getElementById('prev-thu-chungtu').innerText = document.getElementById('thu-chung-tu').value;
-            let dVal = document.getElementById('thu-ngay-lap').value;
-            if (dVal) {
-                let [y, m, d] = dVal.split('-');
-                let str = `Ngày ${d} tháng ${m} năm ${y}`;
-                document.getElementById('prev-thu-ngaythang').innerText = str;
-                document.getElementById('prev-thu-ngayky').innerText = str;
-            }
-            document.getElementById('prev-thu-sig-lap').innerText = document.getElementById('thu-sig-lap').value;
-            document.getElementById('prev-thu-sig-ketoan').innerText = document.getElementById('thu-sig-ketoan').value;
-            document.getElementById('prev-thu-sig-thuquy').innerText = document.getElementById('thu-sig-thuquy').value;
-            document.getElementById('prev-thu-sig-giamdoc').innerText = document.getElementById('thu-sig-giamdoc').value;
-        }
-        function resetFormThu() {
-            document.getElementById('form-thu-data').reset();
-            document.getElementById('thu-ngay-lap').value = new Date().toISOString().split('T')[0];
-            document.getElementById('thu-so-tien').value = "5.200.000";
-            formatAndConvertMoneyThu();
+        function resetToStart() {
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function formatAndConvertMoneyChi() {
-            let rawVal = document.getElementById('chi-so-tien').value.replace(/\D/g, '');
-            let num = parseInt(rawVal || '0', 10);
-            document.getElementById('chi-so-tien').value = num.toLocaleString('vi-VN');
-            document.getElementById('chi-so-tien-chu-preview').innerText = "Bằng chữ: " + docSoThanhChu(num);
-            updatePreviewChi();
-        }
-        function updatePreviewChi() {
-            document.getElementById('prev-chi-so').innerText = document.getElementById('chi-so-phieu').value || '...';
-            document.getElementById('prev-chi-no').innerText = document.getElementById('chi-tk-no').value || '...';
-            document.getElementById('prev-chi-co').innerText = document.getElementById('chi-tk-co').value || '...';
-            document.getElementById('prev-chi-nguoinhan').innerText = document.getElementById('chi-nguoi-nhan').value;
-            document.getElementById('prev-chi-sig-nguoinhan').innerText = document.getElementById('chi-nguoi-nhan').value;
-            document.getElementById('prev-chi-diachi').innerText = document.getElementById('chi-dia-chi').value;
-            document.getElementById('prev-chi-lydo').innerText = document.getElementById('chi-ly-do').value;
-            let num = parseInt(document.getElementById('chi-so-tien').value.replace(/\D/g, '') || '0', 10);
-            document.getElementById('prev-chi-sotien').innerText = num.toLocaleString('vi-VN') + " VNĐ";
-            let words = docSoThanhChu(num);
-            document.getElementById('prev-chi-sotienchu').innerText = words;
-            document.getElementById('prev-chi-chungtu').innerText = document.getElementById('chi-chung-tu').value;
-            let dVal = document.getElementById('chi-ngay-lap').value;
-            if (dVal) {
-                let [y, m, d] = dVal.split('-');
-                let str = `Ngày ${d} tháng ${m} năm ${y}`;
-                document.getElementById('prev-chi-ngaythang').innerText = str;
-                document.getElementById('prev-chi-ngayky').innerText = str;
-            }
-            document.getElementById('prev-chi-sig-lap').innerText = document.getElementById('chi-sig-lap').value;
-            document.getElementById('prev-chi-sig-ketoan').innerText = document.getElementById('chi-sig-ketoan').value;
-            document.getElementById('prev-chi-sig-thuquy').innerText = document.getElementById('chi-sig-thuquy').value;
-            document.getElementById('prev-chi-sig-giamdoc').innerText = document.getElementById('chi-sig-giamdoc').value;
-        }
-        function resetFormChi() {
-            document.getElementById('form-chi-data').reset();
-            document.getElementById('chi-ngay-lap').value = new Date().toISOString().split('T')[0];
-            document.getElementById('chi-so-tien').value = "1.550.000";
-            formatAndConvertMoneyChi();
+        function formatTime(dateObj) {
+            let h = dateObj.getHours().toString().padStart(2, '0');
+            let m = dateObj.getMinutes().toString().padStart(2, '0');
+            let s = dateObj.getSeconds().toString().padStart(2, '0');
+            return `${h}:${m}:${s}`;
         }
 
-        // ================= XỬ LÝ DÒNG VẬT TƯ (NHẬP / XUẤT KHO) =================
-        function formatItemMoney(input) {
-            let raw = input.value.replace(/\D/g, '');
-            let num = parseInt(raw || '0', 10);
-            input.value = num.toLocaleString('vi-VN');
+        function formatDateTime(dateObj) {
+            let d = dateObj.getDate().toString().padStart(2, '0');
+            let mo = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+            let y = dateObj.getFullYear();
+            return `${d}/${mo}/${y} ${formatTime(dateObj)}`;
         }
 
-        function addVTuRow(type) {
-            let containerId = type === 'nhap' ? 'container-items-nhap' : 'container-items-xuat';
-            let container = document.getElementById(containerId);
-            let rowCount = container.children.length + 1;
-            
-            let div = document.createElement('div');
-            div.className = `item-row-${type} bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-2 text-xs`;
-            div.innerHTML = `
-                <div class="flex justify-between items-center">
-                    <span class="font-bold text-${type === 'nhap' ? 'cyan' : 'purple'}-800 item-stt">#${rowCount}</span>
-                    <button type="button" onclick="removeVTuRow(this, '${type}')" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-                <input type="text" placeholder="Tên, nhãn hiệu, quy cách hàng hóa" class="item-ten w-full px-2 py-1.5 border border-slate-300 rounded bg-white" oninput="updatePreview${type === 'nhap' ? 'NhapKho' : 'XuatKho'}()">
-                <div class="grid grid-cols-3 gap-2">
-                    <input type="text" placeholder="Mã số" class="item-maso px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreview${type === 'nhap' ? 'NhapKho' : 'XuatKho'}()">
-                    <input type="text" placeholder="ĐVT" value="Cái" class="item-dvt px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreview${type === 'nhap' ? 'NhapKho' : 'XuatKho'}()">
-                    <input type="number" placeholder="${type === 'nhap' ? 'SL CT' : 'SL Yêu cầu'}" value="10" class="${type === 'nhap' ? 'item-slct' : 'item-slreq'} px-2 py-1 border border-slate-300 rounded bg-white" oninput="updatePreview${type === 'nhap' ? 'NhapKho' : 'XuatKho'}()">
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="text-[10px] text-slate-500">Thực ${type}:</label>
-                        <input type="number" value="10" class="item-sltt w-full px-2 py-1 border border-slate-300 rounded bg-white font-semibold text-${type === 'nhap' ? 'cyan' : 'purple'}-700" oninput="updatePreview${type === 'nhap' ? 'NhapKho' : 'XuatKho'}()">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-slate-500">Đơn giá (VNĐ):</label>
-                        <input type="text" value="100.000" class="item-dongia w-full px-2 py-1 border border-slate-300 rounded bg-white font-semibold" oninput="formatItemMoney(this); updatePreview${type === 'nhap' ? 'NhapKho' : 'XuatKho'}()">
-                    </div>
-                </div>
-            `;
-            container.appendChild(div);
-            if(type === 'nhap') updatePreviewNhapKho(); else updatePreviewXuatKho();
-        }
-
-        function removeVTuRow(btn, type) {
-            let row = btn.closest(`.item-row-${type}`);
-            row.remove();
-            let container = document.getElementById(type === 'nhap' ? 'container-items-nhap' : 'container-items-xuat');
-            Array.from(container.children).forEach((child, idx) => {
-                child.querySelector('.item-stt').innerText = `#${idx + 1}`;
-            });
-            if(type === 'nhap') updatePreviewNhapKho(); else updatePreviewXuatKho();
-        }
-
-        // ================= XỬ LÝ PHIẾU NHẬP KHO =================
-        function updatePreviewNhapKho() {
-            document.getElementById('prev-nk-so').innerText = document.getElementById('nk-so-phieu').value || '...';
-            document.getElementById('prev-nk-no').innerText = document.getElementById('nk-tk-no').value || '...';
-            document.getElementById('prev-nk-co').innerText = document.getElementById('nk-tk-co').value || '...';
-            document.getElementById('prev-nk-nguoigiao').innerText = document.getElementById('nk-nguoi-giao').value || '...';
-            document.getElementById('prev-nk-sig-nguoigiao').innerText = document.getElementById('nk-nguoi-giao').value || '...';
-            document.getElementById('prev-nk-hoadon').innerText = document.getElementById('nk-theo-chung-tu').value || '...';
-            document.getElementById('prev-nk-khonhap').innerText = document.getElementById('nk-kho-nhap').value || '...';
-            document.getElementById('prev-nk-chungtukem').innerText = document.getElementById('nk-chung-tu-kem').value || '...';
-
-            let dVal = document.getElementById('nk-ngay-lap').value;
-            if (dVal) {
-                let [y, m, d] = dVal.split('-');
-                let str = `Ngày ${d} tháng ${m} năm ${y}`;
-                document.getElementById('prev-nk-ngaythang').innerText = str;
-                document.getElementById('prev-nk-ngayky').innerText = str;
-            }
-            let dHdVal = document.getElementById('nk-ngay-chung-tu').value;
-            if (dHdVal) {
-                let [y, m, d] = dHdVal.split('-');
-                document.getElementById('prev-nk-ngayhd').innerText = `${d}/${m}/${y}`;
-            }
-
-            let rows = document.querySelectorAll('.item-row-nhap');
-            let tbody = document.getElementById('prev-nk-tbody');
-            tbody.innerHTML = '';
-            let grandTotal = 0;
-
-            rows.forEach((row, index) => {
-                let ten = row.querySelector('.item-ten').value || '';
-                let maso = row.querySelector('.item-maso').value || '';
-                let dvt = row.querySelector('.item-dvt').value || '';
-                let slct = parseFloat(row.querySelector('.item-slct').value) || 0;
-                let sltt = parseFloat(row.querySelector('.item-sltt').value) || 0;
-                let dg = parseFloat(row.querySelector('.item-dongia').value.replace(/\D/g, '') || '0');
-                let thanhTien = sltt * dg;
-                grandTotal += thanhTien;
-
-                let tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="border border-black p-1.5 text-center">${index + 1}</td>
-                    <td class="border border-black p-1.5">${ten}</td>
-                    <td class="border border-black p-1.5 text-center">${maso}</td>
-                    <td class="border border-black p-1.5 text-center">${dvt}</td>
-                    <td class="border border-black p-1.5 text-center">${slct}</td>
-                    <td class="border border-black p-1.5 text-center font-bold">${sltt}</td>
-                    <td class="border border-black p-1.5 text-right">${dg.toLocaleString('vi-VN')}</td>
-                    <td class="border border-black p-1.5 text-right font-bold">${thanhTien.toLocaleString('vi-VN')}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            document.getElementById('prev-nk-tongtien').innerText = grandTotal.toLocaleString('vi-VN') + " VNĐ";
-            let words = docSoThanhChu(grandTotal);
-            document.getElementById('prev-nk-sotienchu').innerText = words;
-
-            document.getElementById('prev-nk-sig-lap').innerText = document.getElementById('nk-sig-lap').value;
-            document.getElementById('prev-nk-sig-thukho').innerText = document.getElementById('nk-sig-thukho').value;
-            document.getElementById('prev-nk-sig-ketoan').innerText = document.getElementById('nk-sig-ketoan').value;
-        }
-
-        function resetFormNhapKho() {
-            document.getElementById('form-nhapkho-data').reset();
-            document.getElementById('nk-ngay-lap').value = new Date().toISOString().split('T')[0];
-            document.getElementById('nk-ngay-chung-tu').value = new Date().toISOString().split('T')[0];
-            updatePreviewNhapKho();
-        }
-
-        // ================= XỬ LÝ PHIẾU XUẤT KHO =================
-        function updatePreviewXuatKho() {
-            document.getElementById('prev-xk-so').innerText = document.getElementById('xk-so-phieu').value || '...';
-            document.getElementById('prev-xk-no').innerText = document.getElementById('xk-tk-no').value || '...';
-            document.getElementById('prev-xk-co').innerText = document.getElementById('xk-tk-co').value || '...';
-            document.getElementById('prev-xk-nguoinhan').innerText = document.getElementById('xk-nguoi-nhan').value || '...';
-            document.getElementById('prev-xk-sig-nguoinhan').innerText = document.getElementById('xk-nguoi-nhan').value || '...';
-            document.getElementById('prev-xk-lydo').innerText = document.getElementById('xk-ly-do').value || '...';
-            document.getElementById('prev-xk-khoxuat').innerText = document.getElementById('xk-kho-xuat').value || '...';
-            document.getElementById('prev-xk-chungtukem').innerText = document.getElementById('xk-chung-tu-kem').value || '...';
-
-            let dVal = document.getElementById('xk-ngay-lap').value;
-            if (dVal) {
-                let [y, m, d] = dVal.split('-');
-                let str = `Ngày ${d} tháng ${m} năm ${y}`;
-                document.getElementById('prev-xk-ngaythang').innerText = str;
-                document.getElementById('prev-xk-ngayky').innerText = str;
-            }
-
-            let rows = document.querySelectorAll('.item-row-xuat');
-            let tbody = document.getElementById('prev-xk-tbody');
-            tbody.innerHTML = '';
-            let grandTotal = 0;
-
-            rows.forEach((row, index) => {
-                let ten = row.querySelector('.item-ten').value || '';
-                let maso = row.querySelector('.item-maso').value || '';
-                let dvt = row.querySelector('.item-dvt').value || '';
-                let slreq = parseFloat(row.querySelector('.item-slreq').value) || 0;
-                let sltt = parseFloat(row.querySelector('.item-sltt').value) || 0;
-                let dg = parseFloat(row.querySelector('.item-dongia').value.replace(/\D/g, '') || '0');
-                let thanhTien = sltt * dg;
-                grandTotal += thanhTien;
-
-                let tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="border border-black p-1.5 text-center">${index + 1}</td>
-                    <td class="border border-black p-1.5">${ten}</td>
-                    <td class="border border-black p-1.5 text-center">${maso}</td>
-                    <td class="border border-black p-1.5 text-center">${dvt}</td>
-                    <td class="border border-black p-1.5 text-center">${slreq}</td>
-                    <td class="border border-black p-1.5 text-center font-bold">${sltt}</td>
-                    <td class="border border-black p-1.5 text-right">${dg.toLocaleString('vi-VN')}</td>
-                    <td class="border border-black p-1.5 text-right font-bold">${thanhTien.toLocaleString('vi-VN')}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            document.getElementById('prev-xk-tongtien').innerText = grandTotal.toLocaleString('vi-VN') + " VNĐ";
-            let words = docSoThanhChu(grandTotal);
-            document.getElementById('prev-xk-sotienchu').innerText = words;
-
-            document.getElementById('prev-xk-sig-lap').innerText = document.getElementById('xk-sig-lap').value;
-            document.getElementById('prev-xk-sig-thukho').innerText = document.getElementById('xk-sig-thukho').value;
-            document.getElementById('prev-xk-sig-ketoan').innerText = document.getElementById('xk-sig-ketoan').value;
-        }
-
-        function resetFormXuatKho() {
-            document.getElementById('form-xuatkho-data').reset();
-            document.getElementById('xk-ngay-lap').value = new Date().toISOString().split('T')[0];
-            updatePreviewXuatKho();
-        }
-
-        // ================= XUẤT EXCEL / WORD / IN ẤN =================
-        function printVoucher(elementId) {
-            window.print();
-        }
-
-        function exportExcelThu() {
-            let wb = XLSX.utils.book_new();
-            let data = [
-                ["CÔNG TY TNHH THỜI TRANG DB", "", "", "", "MẪU SỐ 01 - TT"],
-                ["Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh", "", "", "", "(Kèm theo Thông tư số 99/2025/TT-BTC)"],
-                ["", "", "", "", ""],
-                ["", "", "PHIẾU THU", "", ""],
-                ["", "", `Ngày ${document.getElementById('thu-ngay-lap').value.split('-').reverse().join(' tháng ')} năm ${document.getElementById('thu-ngay-lap').value.split('-')[0]}`, "", ""],
-                ["", "", `Số: ${document.getElementById('thu-so-phieu').value} | Nợ: ${document.getElementById('thu-tk-no').value} | Có: ${document.getElementById('thu-tk-co').value}`, "", ""],
-                ["", "", "", "", ""],
-                ["Họ tên người nộp tiền:", document.getElementById('thu-nguoi-nop').value, "", "", ""],
-                ["Địa chỉ:", document.getElementById('thu-dia-chi').value, "", "", ""],
-                ["Lý do nộp:", document.getElementById('thu-ly-do').value, "", "", ""],
-                ["Số tiền:", document.getElementById('thu-so-tien').value + " VNĐ", "", "", ""],
-                ["Viết bằng chữ:", document.getElementById('thu-so-tien-chu-preview').innerText.replace("Bằng chữ: ", ""), "", "", ""],
-                ["Chứng từ gốc kèm theo:", document.getElementById('thu-chung-tu').value, "", "", ""],
-                ["", "", "", "", ""],
-                ["Giám đốc", "Kế toán trưởng", "Người nộp tiền", "Người lập phiếu", "Thủ quỹ"],
-                ["(Ký, đóng dấu)", "(Ký, họ tên)", "(Ký, họ tên)", "(Ký, họ tên)", "(Ký, họ tên)"]
-            ];
-            let ws = XLSX.utils.aoa_to_sheet(data);
-            XLSX.utils.book_append_sheet(wb, ws, "PhieuThu");
-            XLSX.writeFile(wb, `PhieuThu_${document.getElementById('thu-so-phieu').value}.xlsx`);
-        }
-
-        function exportExcelChi() {
-            let wb = XLSX.utils.book_new();
-            let data = [
-                ["CÔNG TY TNHH THỜI TRANG DB", "", "", "", "MẪU SỐ 02 - TT"],
-                ["Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh", "", "", "", "(Kèm theo Thông tư số 99/2025/TT-BTC)"],
-                ["", "", "", "", ""],
-                ["", "", "PHIẾU CHI", "", ""],
-                ["", "", `Ngày ${document.getElementById('chi-ngay-lap').value.split('-').reverse().join(' tháng ')} năm ${document.getElementById('chi-ngay-lap').value.split('-')[0]}`, "", ""],
-                ["", "", `Số: ${document.getElementById('chi-so-phieu').value} | Nợ: ${document.getElementById('chi-tk-no').value} | Có: ${document.getElementById('chi-tk-co').value}`, "", ""],
-                ["", "", "", "", ""],
-                ["Họ tên người nhận tiền:", document.getElementById('chi-nguoi-nhan').value, "", "", ""],
-                ["Địa chỉ:", document.getElementById('chi-dia-chi').value, "", "", ""],
-                ["Lý do chi:", document.getElementById('chi-ly-do').value, "", "", ""],
-                ["Số tiền:", document.getElementById('chi-so-tien').value + " VNĐ", "", "", ""],
-                ["Viết bằng chữ:", document.getElementById('chi-so-tien-chu-preview').innerText.replace("Bằng chữ: ", ""), "", "", ""],
-                ["Chứng từ gốc kèm theo:", document.getElementById('chi-chung-tu').value, "", "", ""],
-                ["", "", "", "", ""],
-                ["Giám đốc", "Kế toán trưởng", "Thủ quỹ", "Người lập phiếu", "Người nhận tiền"],
-                ["(Ký, đóng dấu)", "(Ký, họ tên)", "(Ký, họ tên)", "(Ký, họ tên)", "(Ký, họ tên)"]
-            ];
-            let ws = XLSX.utils.aoa_to_sheet(data);
-            XLSX.utils.book_append_sheet(wb, ws, "PhieuChi");
-            XLSX.writeFile(wb, `PhieuChi_${document.getElementById('chi-so-phieu').value}.xlsx`);
-        }
-
-        function exportExcelNhapKho() {
-            let wb = XLSX.utils.book_new();
-            let rows = [
-                ["CÔNG TY TNHH THỜI TRANG DB", "", "", "", "", "", "", "MẪU SỐ 01 - VT"],
-                ["Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh", "", "", "", "", "", "", "(Kèm theo Thông tư số 99/2025/TT-BTC)"],
-                ["", "", "", "", "", "", "", ""],
-                ["", "", "PHIẾU NHẬP KHO", "", "", "", "", ""],
-                ["", "", `Số: ${document.getElementById('nk-so-phieu').value} | Nợ: ${document.getElementById('nk-tk-no').value} | Có: ${document.getElementById('nk-tk-co').value}`, "", "", "", "", ""],
-                ["", "", "", "", "", "", "", ""],
-                ["Người giao hàng:", document.getElementById('nk-nguoi-giao').value, "", "", "", "", "", ""],
-                ["Theo hóa đơn:", document.getElementById('nk-theo-chung-tu').value, "", "", "", "", "", ""],
-                ["Nhập tại kho:", document.getElementById('nk-kho-nhap').value, "", "", "", "", "", ""],
-                ["Chứng từ gốc kèm theo:", document.getElementById('nk-chung-tu-kem').value, "", "", "", "", "", ""],
-                ["", "", "", "", "", "", "", ""],
-                ["STT", "Tên quy cách vật tư", "Mã số", "ĐVT", "Theo CT", "Thực nhập", "Đơn giá", "Thành tiền"]
-            ];
-            
-            let itemRows = document.querySelectorAll('.item-row-nhap');
-            itemRows.forEach((r, idx) => {
-                let ten = r.querySelector('.item-ten').value;
-                let maso = r.querySelector('.item-maso').value;
-                let dvt = r.querySelector('.item-dvt').value;
-                let slct = r.querySelector('.item-slct').value;
-                let sltt = r.querySelector('.item-sltt').value;
-                let dg = r.querySelector('.item-dongia').value;
-                let tt = (parseFloat(sltt || 0) * parseFloat(dg.replace(/\D/g,'') || 0)).toLocaleString('vi-VN');
-                rows.push([idx + 1, ten, maso, dvt, slct, sltt, dg, tt]);
-            });
-
-            rows.push(["", "", "", "", "", "", "CỘNG TỔNG:", document.getElementById('prev-nk-tongtien').innerText]);
-            rows.push(["", "", "", "", "", "", "", ""]);
-            rows.push(["Người lập phiếu", "Người giao hàng", "Thủ kho", "Kế toán trưởng", "", "", "", ""]);
-
-            let ws = XLSX.utils.aoa_to_sheet(rows);
-            XLSX.utils.book_append_sheet(wb, ws, "PhieuNhapKho");
-            XLSX.writeFile(wb, `PhieuNhapKho_${document.getElementById('nk-so-phieu').value}.xlsx`);
-        }
-
-        function exportExcelXuatKho() {
-            let wb = XLSX.utils.book_new();
-            let rows = [
-                ["CÔNG TY TNHH THỜI TRANG DB", "", "", "", "", "", "", "MẪU SỐ 02 - VT"],
-                ["Địa chỉ: Số 125 Nguyễn Văn Linh, Phường Tân Thuận, TP. Hồ Chí Minh", "", "", "", "", "", "", "(Kèm theo Thông tư số 99/2025/TT-BTC)"],
-                ["", "", "", "", "", "", "", ""],
-                ["", "", "PHIẾU XUẤT KHO", "", "", "", "", ""],
-                ["", "", `Số: ${document.getElementById('xk-so-phieu').value} | Nợ: ${document.getElementById('xk-tk-no').value} | Có: ${document.getElementById('xk-tk-co').value}`, "", "", "", "", ""],
-                ["", "", "", "", "", "", "", ""],
-                ["Người nhận hàng:", document.getElementById('xk-nguoi-nhan').value, "", "", "", "", "", ""],
-                ["Lý do xuất:", document.getElementById('xk-ly-do').value, "", "", "", "", "", ""],
-                ["Xuất tại kho:", document.getElementById('xk-kho-xuat').value, "", "", "", "", "", ""],
-                ["Chứng từ gốc kèm theo:", document.getElementById('xk-chung-tu-kem').value, "", "", "", "", "", ""],
-                ["", "", "", "", "", "", "", ""],
-                ["STT", "Tên quy cách vật tư", "Mã số", "ĐVT", "Yêu cầu", "Thực xuất", "Đơn giá", "Thành tiền"]
-            ];
-            
-            let itemRows = document.querySelectorAll('.item-row-xuat');
-            itemRows.forEach((r, idx) => {
-                let ten = r.querySelector('.item-ten').value;
-                let maso = r.querySelector('.item-maso').value;
-                let dvt = r.querySelector('.item-dvt').value;
-                let slreq = r.querySelector('.item-slreq').value;
-                let sltt = r.querySelector('.item-sltt').value;
-                let dg = r.querySelector('.item-dongia').value;
-                let tt = (parseFloat(sltt || 0) * parseFloat(dg.replace(/\D/g,'') || 0)).toLocaleString('vi-VN');
-                rows.push([idx + 1, ten, maso, dvt, slreq, sltt, dg, tt]);
-            });
-
-            rows.push(["", "", "", "", "", "", "CỘNG TỔNG:", document.getElementById('prev-xk-tongtien').innerText]);
-            rows.push(["", "", "", "", "", "", "", ""]);
-            rows.push(["Người lập phiếu", "Người nhận hàng", "Thủ kho", "Kế toán trưởng", "", "", "", ""]);
-
-            let ws = XLSX.utils.aoa_to_sheet(rows);
-            XLSX.utils.book_append_sheet(wb, ws, "PhieuXuatKho");
-            XLSX.writeFile(wb, `PhieuXuatKho_${document.getElementById('xk-so-phieu').value}.xlsx`);
-        }
-
-        function exportWordThu() {
-            let htmlContent = `<html><head><meta charset='utf-8'></head><body style='font-family: "Times New Roman"; font-size: 13pt;'>${document.getElementById('printable-voucher-thu').innerHTML}</body></html>`;
-            let converted = htmlDocx.asBlob(htmlContent);
-            let link = document.createElement('a');
-            link.href = URL.createObjectURL(converted);
-            link.download = `PhieuThu_${document.getElementById('thu-so-phieu').value}.docx`;
-            link.click();
-        }
-
-        function exportWordChi() {
-            let htmlContent = `<html><head><meta charset='utf-8'></head><style>table{width:100%; border-collapse: collapse;} th, td{border: 1px solid black; padding: 5px;}</style><body style='font-family: "Times New Roman"; font-size: 13pt;'>${document.getElementById('printable-voucher-chi').innerHTML}</body></html>`;
-            let converted = htmlDocx.asBlob(htmlContent);
-            let link = document.createElement('a');
-            link.href = URL.createObjectURL(converted);
-            link.download = `PhieuChi_${document.getElementById('chi-so-phieu').value}.docx`;
-            link.click();
-        }
-
-        function exportWordNhapKho() {
-            let htmlContent = `<html><head><meta charset='utf-8'></head><style>table{width:100%; border-collapse: collapse;} th, td{border: 1px solid black; padding: 5px;}</style><body style='font-family: "Times New Roman"; font-size: 12pt;'>${document.getElementById('printable-voucher-nhap').innerHTML}</body></html>`;
-            let converted = htmlDocx.asBlob(htmlContent);
-            let link = document.createElement('a');
-            link.href = URL.createObjectURL(converted);
-            link.download = `PhieuNhapKho_${document.getElementById('nk-so-phieu').value}.docx`;
-            link.click();
-        }
-
-        function exportWordXuatKho() {
-            let htmlContent = `<html><head><meta charset='utf-8'></head><style>table{width:100%; border-collapse: collapse;} th, td{border: 1px solid black; padding: 5px;}</style><body style='font-family: "Times New Roman"; font-size: 12pt;'>${document.getElementById('printable-voucher-xuat').innerHTML}</body></html>`;
-            let converted = htmlDocx.asBlob(htmlContent);
-            let link = document.createElement('a');
-            link.href = URL.createObjectURL(converted);
-            link.download = `PhieuXuatKho_${document.getElementById('xk-so-phieu').value}.docx`;
-            link.click();
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
         }
     </script>
-
-<!-- ================= TÍNH NĂNG BỔ SUNG: BIÊN BẢN THANH LÝ TSCĐ ================= -->
-<script id="addon-thanh-ly-tscd">
-(function(){
-  const style = document.createElement('style');
-  style.textContent = `#view-thanhly .tl-label{display:block;font-size:12px;font-weight:600;color:#475569;margin-bottom:4px}#view-thanhly .tl-input{width:100%;font-size:13px;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;background:white;color:#0f172a}#view-thanhly .tl-section{font-weight:700;font-size:13px;color:#334155;border-bottom:1px solid #e2e8f0;padding-bottom:8px;margin:18px 0 12px}#printable-voucher-thanhly{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.35;color:#000;background:#fff}#printable-voucher-thanhly .tl-line{display:flex;gap:8px;margin:7px 0}#printable-voucher-thanhly .tl-key{min-width:230px}#printable-voucher-thanhly .tl-val{flex:1;border-bottom:1px dotted #333;min-height:18px;white-space:pre-wrap;overflow-wrap:anywhere}#printable-voucher-thanhly .tl-sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:center;margin-top:22px}#printable-voucher-thanhly .tl-signbox{min-height:105px}#printable-voucher-thanhly .tl-signspace{height:58px}@media print{#view-thanhly .no-print{display:none!important}#printable-voucher-thanhly{border:0!important;box-shadow:none!important;padding:0!important;max-width:none!important;width:100%!important}}`;
-  document.head.appendChild(style);
-  const header = document.querySelector('header .flex.flex-wrap.items-center.gap-2');
-  if(header && !document.getElementById('nav-btn-thanhly')) { const b=document.createElement('button'); b.id='nav-btn-thanhly'; b.className='px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-950 text-orange-300 hover:bg-indigo-850 transition flex items-center border border-indigo-700'; b.innerHTML='<i class="fa-solid fa-file-signature mr-1.5"></i> Biên bản thanh lý'; b.onclick=()=>switchView('thanhly'); header.appendChild(b); }
-  const main=document.querySelector('main');
-  const view=document.createElement('div'); view.id='view-thanhly'; view.className='hidden grid grid-cols-1 lg:grid-cols-12 gap-6 tab-transition';
-  view.innerHTML=`
-  <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 no-print flex flex-col">
-    <div class="flex items-center justify-between pb-4 mb-3 border-b border-slate-100"><div class="flex items-center gap-2"><button type="button" onclick="switchView('home')" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-arrow-left"></i></button><h2 class="text-lg font-bold text-orange-800"><i class="fa-solid fa-file-signature mr-2"></i>Biên bản thanh lý TSCĐ</h2></div><button type="button" onclick="resetThanhLy()" class="text-xs text-rose-600 bg-rose-50 px-2.5 py-1 rounded-md">Làm mới</button></div>
-    <form id="form-thanhly" class="space-y-2" onsubmit="return false">
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Đơn vị</label><input class="tl-input" id="tl-donvi" value="Công ty TNHH Thời trang DB"></div><div><label class="tl-label">Bộ phận</label><input class="tl-input" id="tl-bophan" placeholder="Nhập bộ phận"></div></div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Số biên bản</label><input class="tl-input" id="tl-so" value="BBTL001"></div><div><label class="tl-label">Ngày lập</label><input class="tl-input" id="tl-ngay" type="date"></div></div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Tài khoản Nợ</label><input class="tl-input" id="tl-no" placeholder="Nợ"></div><div><label class="tl-label">Tài khoản Có</label><input class="tl-input" id="tl-co" placeholder="Có"></div></div>
-      <div class="tl-section">Căn cứ và Ban thanh lý</div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Quyết định số</label><input class="tl-input" id="tl-quyetdinh"></div><div><label class="tl-label">Ngày quyết định</label><input class="tl-input" id="tl-ngayqd" type="date"></div></div>
-      <div><label class="tl-label">Đơn vị/người ban hành quyết định</label><input class="tl-input" id="tl-coquanqd"></div>
-      <div class="grid grid-cols-1 gap-2" id="tl-members-form">
-      ${[1,2,3].map((n)=>`<div class="grid grid-cols-3 gap-2"><div><label class="tl-label">${n===1?'Trưởng ban':'Ủy viên'} – Họ tên</label><input class="tl-input" id="tl-tv${n}-ten"></div><div><label class="tl-label">Chức vụ</label><input class="tl-input" id="tl-tv${n}-cv"></div><div><label class="tl-label">Đại diện</label><input class="tl-input" id="tl-tv${n}-dd"></div></div>`).join('')}
-      </div>
-      <div class="tl-section">Thông tin tài sản cố định</div>
-      <div><label class="tl-label">Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ</label><input class="tl-input" id="tl-tenta"></div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Số hiệu/Mã TSCĐ</label><input class="tl-input" id="tl-mata"></div><div><label class="tl-label">Năm sản xuất</label><input class="tl-input" id="tl-namsx" type="number"></div></div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Năm đưa vào sử dụng</label><input class="tl-input" id="tl-namsd" type="number"></div><div><label class="tl-label">Số thẻ TSCĐ</label><input class="tl-input" id="tl-sothe"></div></div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2"><div><label class="tl-label">Nguyên giá (VNĐ)</label><input class="tl-input" id="tl-nguyengia" type="text" autocomplete="off" placeholder="Nhập số tiền"><p class="text-xs italic text-slate-500 mt-1" id="tl-nguyengia-chu">Bằng chữ: —</p></div><div><label class="tl-label">Hao mòn lũy kế (VNĐ)</label><input class="tl-input" id="tl-haomon" type="text" autocomplete="off" placeholder="Nhập số tiền"><p class="text-xs italic text-slate-500 mt-1" id="tl-haomon-chu">Bằng chữ: —</p></div><div><label class="tl-label">Giá trị còn lại (VNĐ)</label><input class="tl-input" id="tl-conlai" type="text" readonly placeholder="Tự tính"><p class="text-xs italic text-slate-500 mt-1" id="tl-conlai-chu">Bằng chữ: —</p></div></div>
-      <div><label class="tl-label">Kết luận của Ban thanh lý</label><textarea class="tl-input" id="tl-ketluan" rows="3"></textarea></div>
-      <div class="tl-section">Kết quả thanh lý</div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Chi phí thanh lý (VNĐ)</label><input class="tl-input" id="tl-chiphi" type="text" autocomplete="off" placeholder="0"><p class="text-xs italic text-slate-500 mt-1" id="tl-chiphi-chu">Bằng chữ: —</p></div><div><label class="tl-label">Giá trị thu hồi (VNĐ)</label><input class="tl-input" id="tl-thuhoi" type="text" autocomplete="off" placeholder="0"><p class="text-xs italic text-slate-500 mt-1" id="tl-thuhoi-chu">Bằng chữ: —</p></div></div>
-      <div><label class="tl-label">Ngày ghi giảm sổ TSCĐ</label><input class="tl-input" id="tl-ngayghigiam" type="date"></div>
-      <div class="tl-section">Người ký</div>
-      <div class="grid grid-cols-2 gap-3"><div><label class="tl-label">Trưởng ban thanh lý</label><input class="tl-input" id="tl-ky-truongban"></div><div><label class="tl-label">Giám đốc</label><input class="tl-input" id="tl-ky-giamdoc"></div><div><label class="tl-label">Kế toán trưởng</label><input class="tl-input" id="tl-ky-ketoan"></div></div>
-    </form>
-    <div class="mt-5 pt-4 border-t border-slate-200 grid grid-cols-2 gap-2"><button type="button" onclick="exportExcelThanhLy()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-2.5 px-3 rounded-lg"><i class="fa-solid fa-file-excel mr-1"></i>Xuất Excel</button><button type="button" onclick="exportWordThanhLy()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs py-2.5 px-3 rounded-lg"><i class="fa-solid fa-file-word mr-1"></i>Xuất Word</button><button type="button" onclick="printVoucher('printable-voucher-thanhly')" class="col-span-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs py-3 px-3 rounded-lg"><i class="fa-solid fa-print mr-2"></i>In biên bản (A4)</button></div>
-  </div>
-  <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 flex flex-col items-center overflow-x-auto"><div class="w-full flex justify-between items-center mb-4 no-print border-b border-slate-100 pb-3"><span class="text-xs font-bold uppercase tracking-wider text-orange-900 bg-orange-50 px-3 py-1 rounded-full"><i class="fa-solid fa-eye mr-1"></i>Xem trước biên bản</span><button onclick="switchView('home')" class="text-xs text-indigo-600 hover:underline">Về Trang chủ</button></div>
-  <div id="printable-voucher-thanhly" class="printable-area w-full max-w-[210mm] p-6 border border-slate-200 shadow-md rounded-lg">
-   <table style="width:100%;margin-bottom:18px"><tr><td style="width:58%;vertical-align:top"><b id="tlp-donvi">Đơn vị: Công ty TNHH Thời trang DB</b><div id="tlp-bophan">Bộ phận: ………………</div></td><td style="text-align:right;vertical-align:top"><b>Mẫu số 02 - TSCĐ</b><div style="font-size:10pt;font-style:italic">(Kèm theo Thông tư số 99/2025/TT-BTC)</div><div>Số: <span id="tlp-so">BBTL001</span></div><div>Nợ: <span id="tlp-no">……</span></div><div>Có: <span id="tlp-co">……</span></div></td></tr></table>
-   <div style="text-align:center;margin:18px 0"><h2 style="font-size:18pt;font-weight:bold">BIÊN BẢN THANH LÝ TÀI SẢN CỐ ĐỊNH</h2><div id="tlp-ngay" style="font-style:italic">Ngày … tháng … năm …</div></div>
-   <p>Căn cứ Quyết định số <span id="tlp-quyetdinh">……………</span> ngày <span id="tlp-ngayqd">…/…/……</span> của <span id="tlp-coquanqd">……………</span> về việc thanh lý tài sản cố định.</p>
-   <p style="font-weight:bold;margin-top:12px">I. Ban thanh lý TSCĐ gồm:</p><div id="tlp-members"></div>
-   <p style="font-weight:bold;margin-top:12px">II. Tiến hành thanh lý TSCĐ:</p>
-   <div class="tl-line"><span class="tl-key">Tên, ký mã hiệu, quy cách (cấp hạng) TSCĐ</span><span class="tl-val" id="tlp-tenta"></span></div><div class="tl-line"><span class="tl-key">Số hiệu TSCĐ/Mã TSCĐ</span><span class="tl-val" id="tlp-mata"></span></div><div class="tl-line"><span class="tl-key">Năm sản xuất</span><span class="tl-val" id="tlp-namsx"></span></div><div class="tl-line"><span class="tl-key">Năm đưa vào sử dụng</span><span class="tl-val" id="tlp-namsd"></span><span>Số thẻ TSCĐ:</span><span class="tl-val" id="tlp-sothe"></span></div><div class="tl-line"><span class="tl-key">Nguyên giá TSCĐ</span><span class="tl-val" id="tlp-nguyengia"></span></div><div class="tl-line"><span class="tl-key">Giá trị hao mòn đã trích đến thời điểm thanh lý</span><span class="tl-val" id="tlp-haomon"></span></div><div class="tl-line"><span class="tl-key">Giá trị còn lại của TSCĐ</span><span class="tl-val" id="tlp-conlai"></span></div>
-   <p style="font-weight:bold;margin-top:14px">III. Kết luận của Ban thanh lý TSCĐ:</p><p id="tlp-ketluan" style="min-height:35px;white-space:pre-wrap;border-bottom:1px dotted #555"></p><div style="text-align:right;margin-top:12px;font-style:italic"><span id="tlp-ngaytruongban">Ngày … tháng … năm …</span></div><div style="display:flex;justify-content:flex-end;margin-top:8px"><div class="tl-signbox" style="width:33.333%;text-align:center"><b>TRƯỞNG BAN THANH LÝ</b><div><i>(Ký, họ tên)</i></div><div class="tl-signspace"></div><b id="tlp-ky-truongban"></b></div></div>
-   <p style="font-weight:bold;margin-top:16px">IV. Kết quả thanh lý TSCĐ:</p><div class="tl-line"><span class="tl-key">Chi phí thanh lý TSCĐ</span><span class="tl-val" id="tlp-chiphi"></span></div><div style="margin-left:10px;font-style:italic">(Viết bằng chữ: <span id="tlp-chiphi-chu">—</span>)</div><div class="tl-line"><span class="tl-key">Giá trị thu hồi</span><span class="tl-val" id="tlp-thuhoi"></span></div><div style="margin-left:10px;font-style:italic">(Viết bằng chữ: <span id="tlp-thuhoi-chu">—</span>)</div><div class="tl-line"><span class="tl-key">Đã ghi giảm sổ TSCĐ ngày</span><span class="tl-val" id="tlp-ngayghigiam"></span></div>
-   <div class="tl-sign" style="grid-template-columns:repeat(2,minmax(0,1fr));justify-content:space-between"><div class="tl-signbox"><b>GIÁM ĐỐC</b><div><i>(Ký, họ tên, đóng dấu)</i></div><div class="tl-signspace"></div><b id="tlp-ky-giamdoc"></b></div><div class="tl-signbox"><b>KẾ TOÁN TRƯỜNG</b><div><i>(Ký, họ tên)</i></div><div class="tl-signspace"></div><b id="tlp-ky-ketoan"></b></div></div>
-  </div></div>`;
-  main.appendChild(view);
-  const cards=Array.from(document.querySelector('#view-home').children).find(el=>el.classList.contains('grid')&&el.classList.contains('lg:grid-cols-4'));
-  if(cards){const c=document.createElement('div');c.className='bg-white p-5 rounded-2xl shadow-sm border border-slate-200 cursor-pointer hover:border-orange-400 hover:shadow-md transition';c.onclick=()=>switchView('thanhly');c.innerHTML='<div class="flex items-center justify-between"><div><p class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Biên bản thanh lý</p><h3 class="text-xl font-bold text-orange-600 mt-1">Mẫu 02-TSCĐ</h3></div><div class="bg-orange-50 text-orange-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-file-signature"></i></div></div><p class="text-xs text-slate-400 mt-2">Lập, xem trước, xuất file và in biên bản thanh lý tài sản cố định</p>';cards.appendChild(c);}
-  const oldSwitchView=window.switchView;
-  window.switchView=function(name){if(name!=='thanhly')view.classList.add('hidden');if(name==='thanhly'){['home','thu','chi','nhapkho','xuatkho'].forEach(v=>{const el=document.getElementById('view-'+v);if(el)el.classList.add('hidden');const b=document.getElementById('nav-btn-'+v);if(b)b.className='px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center bg-indigo-950 text-indigo-200 border border-indigo-700 hover:bg-indigo-850';});view.classList.remove('hidden');const b=document.getElementById('nav-btn-thanhly');if(b)b.className='px-3.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center bg-orange-600 text-white shadow';window.scrollTo({top:0,behavior:'smooth'});return;}if(oldSwitchView)oldSwitchView(name);};
-  const ids=['donvi','bophan','so','ngay','no','co','quyetdinh','ngayqd','coquanqd','tenta','mata','namsx','namsd','sothe','nguyengia','haomon','conlai','ketluan','chiphi','thuhoi','ngayghigiam','ky-truongban','ky-giamdoc','ky-ketoan'];
-  const dateFmt=v=>{if(!v)return '…/…/……';const [y,m,d]=v.split('-');return `${d} tháng ${m} năm ${y}`};
-  
-  // Sửa hàm lấy số chuẩn xác từ chuỗi nhập có định dạng dấu chấm ngăn cách hàng nghìn
-  const num=id=>{const val=document.getElementById(id)?.value||'';return parseInt(val.replace(/\D/g,''),10)||0;};
-  const money=n=>Math.max(0,Math.round(n||0)).toLocaleString('vi-VN')+' đồng';
-  
-  function update(){
-    const gia=num('tl-nguyengia'),hao=num('tl-haomon'),conlai=Math.max(0,gia-hao);
-    document.getElementById('tl-conlai').value=conlai ? conlai.toLocaleString('vi-VN') : '';
-    
-    ['nguyengia','haomon','conlai','chiphi','thuhoi'].forEach(id=>{
-        const n=id==='conlai'?conlai:num('tl-'+id);
-        const w=moneyWords(n);
-        const target=document.getElementById('tl-'+id+'-chu');
-        if(target)target.textContent='Bằng chữ: '+w;
-    });
-    
-    ids.forEach(id=>{
-        let el=document.getElementById('tlp-'+id);if(!el)return;
-        let v=document.getElementById('tl-'+id).value; 
-        if(['ngay','ngayqd','ngayghigiam'].includes(id)) v=dateFmt(v); 
-        if(['nguyengia','haomon','conlai','chiphi','thuhoi'].includes(id)) {
-            let n = id==='conlai' ? conlai : num('tl-'+id);
-            v = n ? money(n) : '…………';
-        }
-        el.textContent=v||'…………';
-    });
-    
-    document.getElementById('tlp-ngaytruongban').textContent=document.getElementById('tl-ngay').value?'Ngày '+dateFmt(document.getElementById('tl-ngay').value):'Ngày … tháng … năm …';
-    document.getElementById('tlp-members').innerHTML=[1,2,3].map(n=>{const ten=document.getElementById('tl-tv'+n+'-ten').value||'………………',cv=document.getElementById('tl-tv'+n+'-cv').value||'…………',dd=document.getElementById('tl-tv'+n+'-dd').value||'…………';return `<p>Ông/Bà: ${esc(ten)} &nbsp; Chức vụ: ${esc(cv)} &nbsp; Đại diện: ${esc(dd)} &nbsp; ${n===1?'Trưởng ban':'Ủy viên'}</p>`}).join('');
-    
-    ['chiphi','thuhoi'].forEach(id=>{
-        const words=moneyWords(num('tl-'+id));
-        const chiphiChuEl = document.getElementById('tl-'+id+'-chu');
-        if(chiphiChuEl) chiphiChuEl.textContent='Bằng chữ: '+words;
-        const targetP = document.getElementById('tlp-'+id+'-chu');
-        if(targetP) targetP.textContent=words;
-    });
-  }
-  
-  function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function moneyWords(n){n=Math.max(0,Math.floor(Number(n)||0));if(typeof window.docSoThanhChu==='function')return window.docSoThanhChu(n);return n.toLocaleString('vi-VN')+' đồng chẵn.';}
-  
-  ids.forEach(id=>{const el=document.getElementById('tl-'+id);if(el){el.addEventListener('input',update);el.addEventListener('change',update);}});
-  [1,2,3].forEach(n=>['ten','cv','dd'].forEach(k=>document.getElementById(`tl-tv${n}-${k}`).addEventListener('input',update)));
-  
-  // Xử lý định dạng tiền tệ động khi nhập các ô số tiền
-  ['nguyengia','haomon','chiphi','thuhoi'].forEach(id=>{
-      const inputEl = document.getElementById('tl-'+id);
-      if(inputEl){
-          inputEl.addEventListener('input', e => {
-              let raw = e.target.value.replace(/\D/g, '');
-              let val = parseInt(raw, 10);
-              e.target.value = isNaN(val) || val === 0 ? '' : val.toLocaleString('vi-VN');
-              update();
-          });
-      }
-  });
-
-  window.resetThanhLy=function(){document.getElementById('form-thanhly').reset();document.getElementById('tl-so').value='BBTL001';update();};
-  window.exportExcelThanhLy=function(){update();const rows=[['Đơn vị',document.getElementById('tl-donvi').value],['Bộ phận',document.getElementById('tl-bophan').value],['Mẫu số','02 - TSCĐ'],['BIÊN BẢN THANH LÝ TÀI SẢN CỐ ĐỊNH'],['Số biên bản',document.getElementById('tl-so').value],['Ngày lập',document.getElementById('tl-ngay').value],['Tài khoản Nợ',document.getElementById('tl-no').value],['Tài khoản Có',document.getElementById('tl-co').value],['Quyết định số',document.getElementById('tl-quyetdinh').value],['Ngày quyết định',document.getElementById('tl-ngayqd').value],['Cơ quan ban hành',document.getElementById('tl-coquanqd').value],['Ban thanh lý'],...([1,2,3].map(n=>['Thành viên '+n,document.getElementById('tl-tv'+n+'-ten').value,document.getElementById('tl-tv'+n+'-cv').value,document.getElementById('tl-tv'+n+'-dd').value])),['Tên TSCĐ',document.getElementById('tl-tenta').value],['Mã TSCĐ',document.getElementById('tl-mata').value],['Năm sản xuất',document.getElementById('tl-namsx').value],['Năm đưa vào sử dụng',document.getElementById('tl-namsd').value],['Số thẻ TSCĐ',document.getElementById('tl-sothe').value],['Nguyên giá',num('tl-nguyengia')],['Hao mòn lũy kế',num('tl-haomon')],['Giá trị còn lại',Math.max(0,num('tl-nguyengia')-num('tl-haomon'))],['Kết luận',document.getElementById('tl-ketluan').value],['Chi phí thanh lý',num('tl-chiphi')],['Chi phí bằng chữ',moneyWords(num('tl-chiphi'))],['Giá trị thu hồi',num('tl-thuhoi')],['Giá trị thu hồi bằng chữ',moneyWords(num('tl-thuhoi'))],['Ngày ghi giảm',document.getElementById('tl-ngayghigiam').value],['Trưởng ban thanh lý',document.getElementById('tl-ky-truongban').value],['Giám đốc',document.getElementById('tl-ky-giamdoc').value],['Kế toán trưởng',document.getElementById('tl-ky-ketoan').value]];const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(rows),'BienBanThanhLy');XLSX.writeFile(wb,`BienBanThanhLy_${document.getElementById('tl-so').value||'TSCĐ'}.xlsx`);};
-  window.exportWordThanhLy=function(){update();const html=`<html><head><meta charset="utf-8"><style>body{font-family:'Times New Roman';font-size:12pt}table{width:100%}.tl-line{display:flex;margin:6px 0}.tl-key{min-width:230px}.tl-val{flex:1;border-bottom:1px dotted #333}.tl-sign{display:flex;justify-content:space-around;text-align:center;margin-top:24px}</style></head><body>${document.getElementById('printable-voucher-thanhly').innerHTML}</body></html>`;const blob=htmlDocx.asBlob(html),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`BienBanThanhLy_${document.getElementById('tl-so').value||'TSCD'}.docx`;a.click();URL.revokeObjectURL(a.href);};
-  const today=new Date();document.getElementById('tl-ngay').value=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;update();
-})();
-</script>
 </body>
 </html>
