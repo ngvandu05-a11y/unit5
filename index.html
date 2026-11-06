@@ -855,11 +855,18 @@
                     if (studentAns === '') studentAns = '(Bỏ trống)';
                 }
 
+                // --- ĐÃ SỬA: Xử lý kiểm tra đáp án an toàn cho cả dạng chuỗi và mảng đáp án ---
                 let isCorrect = false;
+                let displayAnswer = Array.isArray(q.answer) ? q.answer[0] : q.answer;
+
                 if (q.type === 'mc' || q.type === 'dialogue_mc') {
                     isCorrect = (studentAns === q.answer);
                 } else {
-                    isCorrect = (studentAns.toLowerCase() === q.answer.toLowerCase());
+                    if (Array.isArray(q.answer)) {
+                        isCorrect = q.answer.some(ans => studentAns.toLowerCase() === ans.toLowerCase());
+                    } else {
+                        isCorrect = (studentAns.toLowerCase() === q.answer.toLowerCase());
+                    }
                 }
 
                 if (isCorrect) correctCount++;
@@ -868,7 +875,7 @@
                 detailsData.push({
                     questionNo: idx + 1,
                     questionText: q.q,
-                    correctAnswer: q.answer,
+                    correctAnswer: displayAnswer,
                     studentAnswer: studentAns,
                     isCorrect: isCorrect,
                     score: questionScore.toFixed(2)
@@ -891,7 +898,7 @@
                             👉 Cẩm Tiên chọn/điền: <strong style="color: ${isCorrect ? '#16a34a' : '#dc2626'};" class="en-text">${escapeHtml(studentAns)}</strong>
                         </div>
                         <div style="font-size: 0.95rem; margin-bottom: 6px;">
-                            ✅ Đáp án đúng: <strong style="color: #16a34a;" class="en-text">${escapeHtml(q.answer)}</strong>
+                            ✅ Đáp án đúng: <strong style="color: #16a34a;" class="en-text">${escapeHtml(displayAnswer)}</strong>
                         </div>
                         <div class="explanation-box">
                             📌 <strong>Lời giải chi tiết:</strong> ${q.exp}
